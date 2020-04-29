@@ -8,21 +8,23 @@
 
 /* Begin PBXBuildFile section */
 		04948CF024511D010076BE47 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04948CEF24511D010076BE47 /* AppDelegate.swift */; };
-		04948CF424511D010076BE47 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04948CF324511D010076BE47 /* MainViewController.swift */; };
+		04948CF424511D010076BE47 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04948CF324511D010076BE47 /* MainView.swift */; };
 		04948CF924511D060076BE47 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 04948CF824511D060076BE47 /* Assets.xcassets */; };
 		04948CFC24511D060076BE47 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 04948CFA24511D060076BE47 /* LaunchScreen.storyboard */; };
-		04ABEB5E2457B55000D3392E /* FinedustInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04ABEB5D2457B54F00D3392E /* FinedustInfo.swift */; };
+		04ABEB5E2457B55000D3392E /* FinedustModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04ABEB5D2457B54F00D3392E /* FinedustModel.swift */; };
+		04ABEB62245816AF00D3392E /* MainController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04ABEB61245816AF00D3392E /* MainController.swift */; };
 		747CABACABBE97843B823C77 /* Pods_FinedustInfo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A1185E377F017CF9A0A6FF04 /* Pods_FinedustInfo.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		04948CEC24511D010076BE47 /* FinedustInfo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FinedustInfo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		04948CEF24511D010076BE47 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		04948CF324511D010076BE47 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
+		04948CF324511D010076BE47 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		04948CF824511D060076BE47 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		04948CFB24511D060076BE47 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		04948CFD24511D060076BE47 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		04ABEB5D2457B54F00D3392E /* FinedustInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinedustInfo.swift; sourceTree = "<group>"; };
+		04ABEB5D2457B54F00D3392E /* FinedustModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinedustModel.swift; sourceTree = "<group>"; };
+		04ABEB61245816AF00D3392E /* MainController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainController.swift; sourceTree = "<group>"; };
 		059FB8B56EF369AA5194F249 /* Pods-FinedustInfo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FinedustInfo.release.xcconfig"; path = "Target Support Files/Pods-FinedustInfo/Pods-FinedustInfo.release.xcconfig"; sourceTree = "<group>"; };
 		764879B8272F41C8DC20F422 /* Pods-FinedustInfo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FinedustInfo.debug.xcconfig"; path = "Target Support Files/Pods-FinedustInfo/Pods-FinedustInfo.debug.xcconfig"; sourceTree = "<group>"; };
 		A1185E377F017CF9A0A6FF04 /* Pods_FinedustInfo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FinedustInfo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -62,8 +64,9 @@
 			isa = PBXGroup;
 			children = (
 				04948CEF24511D010076BE47 /* AppDelegate.swift */,
-				04948CF324511D010076BE47 /* MainViewController.swift */,
-				04ABEB5D2457B54F00D3392E /* FinedustInfo.swift */,
+				04ABEB61245816AF00D3392E /* MainController.swift */,
+				04948CF324511D010076BE47 /* MainView.swift */,
+				04ABEB5D2457B54F00D3392E /* FinedustModel.swift */,
 				04948CF824511D060076BE47 /* Assets.xcassets */,
 				04948CFA24511D060076BE47 /* LaunchScreen.storyboard */,
 				04948CFD24511D060076BE47 /* Info.plist */,
@@ -202,9 +205,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				04948CF424511D010076BE47 /* MainViewController.swift in Sources */,
+				04ABEB62245816AF00D3392E /* MainController.swift in Sources */,
+				04948CF424511D010076BE47 /* MainView.swift in Sources */,
 				04948CF024511D010076BE47 /* AppDelegate.swift in Sources */,
-				04ABEB5E2457B55000D3392E /* FinedustInfo.swift in Sources */,
+				04ABEB5E2457B55000D3392E /* FinedustModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
