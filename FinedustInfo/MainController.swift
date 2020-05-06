@@ -77,7 +77,7 @@ class MainController: MainViewController , CLLocationManagerDelegate{
     func setValues() {
         activityIndicator.startAnimating()
         fetchUserLocation()
-        DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(500)) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1500)) {
             FinedustInfo.sendRequest(userLocation: self.userLocation, serviceKey: self.serviceKey, completion: { (nowFinedust) in
                 let indicatorImg = FinedustInfo.setIndicatorImageName(data: nowFinedust.finedustGrade)
                 let finedustGradName : String = String(FinedustInfo.checkFinedustGrade(data: nowFinedust.finedustGrade))
