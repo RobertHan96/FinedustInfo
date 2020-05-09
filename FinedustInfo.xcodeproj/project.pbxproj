@@ -13,8 +13,19 @@
 		04948CFC24511D060076BE47 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 04948CFA24511D060076BE47 /* LaunchScreen.storyboard */; };
 		04ABEB5E2457B55000D3392E /* FinedustModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04ABEB5D2457B54F00D3392E /* FinedustModel.swift */; };
 		04ABEB62245816AF00D3392E /* MainController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04ABEB61245816AF00D3392E /* MainController.swift */; };
+		04ABEB7824667C8100D3392E /* FinedustInfoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04ABEB7724667C8100D3392E /* FinedustInfoTests.swift */; };
 		747CABACABBE97843B823C77 /* Pods_FinedustInfo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A1185E377F017CF9A0A6FF04 /* Pods_FinedustInfo.framework */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		04ABEB7A24667C8100D3392E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 04948CE424511D000076BE47 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 04948CEB24511D010076BE47;
+			remoteInfo = FinedustInfo;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		04948CEC24511D010076BE47 /* FinedustInfo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FinedustInfo.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -25,6 +36,9 @@
 		04948CFD24511D060076BE47 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		04ABEB5D2457B54F00D3392E /* FinedustModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinedustModel.swift; sourceTree = "<group>"; };
 		04ABEB61245816AF00D3392E /* MainController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainController.swift; sourceTree = "<group>"; };
+		04ABEB7524667C8000D3392E /* FinedustInfoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FinedustInfoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		04ABEB7724667C8100D3392E /* FinedustInfoTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinedustInfoTests.swift; sourceTree = "<group>"; };
+		04ABEB7924667C8100D3392E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		059FB8B56EF369AA5194F249 /* Pods-FinedustInfo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FinedustInfo.release.xcconfig"; path = "Target Support Files/Pods-FinedustInfo/Pods-FinedustInfo.release.xcconfig"; sourceTree = "<group>"; };
 		764879B8272F41C8DC20F422 /* Pods-FinedustInfo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FinedustInfo.debug.xcconfig"; path = "Target Support Files/Pods-FinedustInfo/Pods-FinedustInfo.debug.xcconfig"; sourceTree = "<group>"; };
 		A1185E377F017CF9A0A6FF04 /* Pods_FinedustInfo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FinedustInfo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -39,6 +53,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		04ABEB7224667C8000D3392E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -46,6 +67,7 @@
 			isa = PBXGroup;
 			children = (
 				04948CEE24511D010076BE47 /* FinedustInfo */,
+				04ABEB7624667C8100D3392E /* FinedustInfoTests */,
 				04948CED24511D010076BE47 /* Products */,
 				5E3192D8717732FF46C6F6CF /* Pods */,
 				B6990F016DFF0A86F6466148 /* Frameworks */,
@@ -56,6 +78,7 @@
 			isa = PBXGroup;
 			children = (
 				04948CEC24511D010076BE47 /* FinedustInfo.app */,
+				04ABEB7524667C8000D3392E /* FinedustInfoTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -72,6 +95,15 @@
 				04948CFD24511D060076BE47 /* Info.plist */,
 			);
 			path = FinedustInfo;
+			sourceTree = "<group>";
+		};
+		04ABEB7624667C8100D3392E /* FinedustInfoTests */ = {
+			isa = PBXGroup;
+			children = (
+				04ABEB7724667C8100D3392E /* FinedustInfoTests.swift */,
+				04ABEB7924667C8100D3392E /* Info.plist */,
+			);
+			path = FinedustInfoTests;
 			sourceTree = "<group>";
 		};
 		5E3192D8717732FF46C6F6CF /* Pods */ = {
@@ -113,6 +145,24 @@
 			productReference = 04948CEC24511D010076BE47 /* FinedustInfo.app */;
 			productType = "com.apple.product-type.application";
 		};
+		04ABEB7424667C8000D3392E /* FinedustInfoTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 04ABEB7E24667C8100D3392E /* Build configuration list for PBXNativeTarget "FinedustInfoTests" */;
+			buildPhases = (
+				04ABEB7124667C8000D3392E /* Sources */,
+				04ABEB7224667C8000D3392E /* Frameworks */,
+				04ABEB7324667C8000D3392E /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				04ABEB7B24667C8100D3392E /* PBXTargetDependency */,
+			);
+			name = FinedustInfoTests;
+			productName = FinedustInfoTests;
+			productReference = 04ABEB7524667C8000D3392E /* FinedustInfoTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -125,6 +175,10 @@
 				TargetAttributes = {
 					04948CEB24511D010076BE47 = {
 						CreatedOnToolsVersion = 11.3.1;
+					};
+					04ABEB7424667C8000D3392E = {
+						CreatedOnToolsVersion = 11.3.1;
+						TestTargetID = 04948CEB24511D010076BE47;
 					};
 				};
 			};
@@ -142,6 +196,7 @@
 			projectRoot = "";
 			targets = (
 				04948CEB24511D010076BE47 /* FinedustInfo */,
+				04ABEB7424667C8000D3392E /* FinedustInfoTests */,
 			);
 		};
 /* End PBXProject section */
@@ -153,6 +208,13 @@
 			files = (
 				04948CFC24511D060076BE47 /* LaunchScreen.storyboard in Resources */,
 				04948CF924511D060076BE47 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		04ABEB7324667C8000D3392E /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -212,7 +274,23 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		04ABEB7124667C8000D3392E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				04ABEB7824667C8100D3392E /* FinedustInfoTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		04ABEB7B24667C8100D3392E /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 04948CEB24511D010076BE47 /* FinedustInfo */;
+			targetProxy = 04ABEB7A24667C8100D3392E /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		04948CFA24511D060076BE47 /* LaunchScreen.storyboard */ = {
@@ -378,6 +456,46 @@
 			};
 			name = Release;
 		};
+		04ABEB7C24667C8100D3392E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 2KMX75GUSK;
+				INFOPLIST_FILE = FinedustInfoTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = roberthan.FinedustInfoTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/FinedustInfo.app/FinedustInfo";
+			};
+			name = Debug;
+		};
+		04ABEB7D24667C8100D3392E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 2KMX75GUSK;
+				INFOPLIST_FILE = FinedustInfoTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = roberthan.FinedustInfoTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/FinedustInfo.app/FinedustInfo";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -395,6 +513,15 @@
 			buildConfigurations = (
 				04948D0124511D060076BE47 /* Debug */,
 				04948D0224511D060076BE47 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		04ABEB7E24667C8100D3392E /* Build configuration list for PBXNativeTarget "FinedustInfoTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				04ABEB7C24667C8100D3392E /* Debug */,
+				04ABEB7D24667C8100D3392E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
