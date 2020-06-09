@@ -10,7 +10,7 @@ class MainViewController: UIViewController {
     }
     
     func setupUI() {
-        view.backgroundColor = .systemBackground
+        view.backgroundColor = .secondarySystemBackground
         view.addSubview(LocationNameLabel)
         view.addSubview(containerView)
         view.addSubview(dateTimeLabel)
@@ -134,7 +134,7 @@ class MainViewController: UIViewController {
         $0.setImage(image, for: .normal)
     }
     let indicatorFaceImageView = UIImageView().then {
-        let face = UIImage(named: "good")
+        let face = UIImage(named: "fail_to_load")
         $0.image = face
     }
     let indicatorLabel = UILabel().then {
@@ -144,13 +144,13 @@ class MainViewController: UIViewController {
         $0.textColor = .black
     }
     let finedustNameLabel = UILabel().then {
-        $0.text = "미세먼지"
+        $0.text = "finedust".localized
         $0.adjustsFontSizeToFitWidth = true
         $0.font = UIFont.systemFont(ofSize: 24)
         $0.textColor = .black
     }
     let ultraFinedustNameLabel = UILabel().then {
-        $0.text = "초미세먼지"
+        $0.text = "ultraFinedust".localized
         $0.adjustsFontSizeToFitWidth = true
         $0.font = UIFont.systemFont(ofSize: 24)
         $0.textColor = .black

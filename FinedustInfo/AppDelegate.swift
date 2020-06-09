@@ -13,6 +13,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             window.rootViewController = navationController
             window.makeKeyAndVisible()
         }
+        if #available(iOS 13.0, *){
+            self.window?.overrideUserInterfaceStyle = .light
+        }
         sleep(2)
         return true
     }

@@ -1,32 +1,36 @@
-//
-//  FinedustInfoTests.swift
-//  FinedustInfoTests
-//
-//  Created by Mac on 2020/05/09.
-//  Copyright © 2020 Mac. All rights reserved.
-//
-
 import XCTest
+@testable import FinedustInfo
 
 class FinedustInfoTests: XCTestCase {
+    var finedustTestObj : FinedustInfo?
+    let expectedImageName : String = "good"
+    let expectedGradeName : String = "매우나쁨"
 
+    
     override func setUp() {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+        super.setUp()
+        finedustTestObj = FinedustInfo(pm10Value: 30, pm10Grade: 1, pm25Value: 90, pm25Grade: 4, dateTime: "2020-05-09 15:00")
     }
 
     override func tearDown() {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
+        super.tearDown()
+        finedustTestObj = nil
     }
-
-    func testExample() {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
+    
+    func testsStIndicatorImageName() {
+        XCTAssertEqual(FinedustInfo.setIndicatorImageName(data: 1), expectedImageName)
     }
+    
+//    func testCheckFinedustGrade() {
+//        XCTAssertEqual(FinedustInfo.checkFinedustGrade(data: finedustTestObj!.ultraFineDustGrade), expectedGradeName)
+//    }
 
+    func testGetFinedustInfoFromJson() {
+        
+    }
+        
     func testPerformanceExample() {
-        // This is an example of a performance test case.
         measure {
-            // Put the code you want to measure the time of here.
         }
     }
 

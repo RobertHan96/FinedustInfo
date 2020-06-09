@@ -10,5 +10,6 @@ target 'FinedustInfo' do
   pod 'Then'
   pod 'Alamofire', '~> 5.1'
   pod 'SwiftyJSON', '~> 4.o'
+  pod 'Kingfisher', '~> 5.0'
 
 end
