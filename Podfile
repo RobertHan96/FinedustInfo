@@ -11,5 +11,6 @@ target 'FinedustInfo' do
   pod 'Alamofire', '~> 5.1'
   pod 'SwiftyJSON', '~> 4.o'
   pod 'Kingfisher', '~> 5.0'
-
+  pod 'Firebase/Analytics'
+  
 end

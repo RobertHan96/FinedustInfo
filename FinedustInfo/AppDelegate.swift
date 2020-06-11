@@ -1,4 +1,5 @@
 import UIKit
+import Firebase
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -16,8 +17,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if #available(iOS 13.0, *){
             self.window?.overrideUserInterfaceStyle = .light
         }
-        
+        FirebaseApp.configure()
         sleep(2)
+        
         return true
     }
 }
