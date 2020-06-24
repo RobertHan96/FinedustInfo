@@ -10,7 +10,6 @@
 		041AC7D4247FA82600B3227D /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 041AC7D3247FA82600B3227D /* Extensions.swift */; };
 		0492D37E248F625E0009B6DC /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0492D380248F625E0009B6DC /* Localizable.strings */; };
 		0492D384248F63D10009B6DC /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0492D386248F63D10009B6DC /* InfoPlist.strings */; };
-		0492D39D2491B8AF0009B6DC /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0492D39C2491B8AF0009B6DC /* GoogleService-Info.plist */; };
 		04948CF024511D010076BE47 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04948CEF24511D010076BE47 /* AppDelegate.swift */; };
 		04948CF424511D010076BE47 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04948CF324511D010076BE47 /* MainView.swift */; };
 		04948CF924511D060076BE47 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 04948CF824511D060076BE47 /* Assets.xcassets */; };
@@ -18,6 +17,7 @@
 		04ABEB5E2457B55000D3392E /* FinedustModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04ABEB5D2457B54F00D3392E /* FinedustModel.swift */; };
 		04ABEB62245816AF00D3392E /* MainController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04ABEB61245816AF00D3392E /* MainController.swift */; };
 		04ABEB7824667C8100D3392E /* FinedustInfoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04ABEB7724667C8100D3392E /* FinedustInfoTests.swift */; };
+		04F6191724A2E8BB004F1A9B /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 04F6191624A2E8BB004F1A9B /* GoogleService-Info.plist */; };
 		747CABACABBE97843B823C77 /* Pods_FinedustInfo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A1185E377F017CF9A0A6FF04 /* Pods_FinedustInfo.framework */; };
 /* End PBXBuildFile section */
 
@@ -38,7 +38,6 @@
 		0492D381248F62630009B6DC /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/Localizable.strings; sourceTree = "<group>"; };
 		0492D385248F63D10009B6DC /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		0492D387248F63D30009B6DC /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		0492D39C2491B8AF0009B6DC /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		04948CEC24511D010076BE47 /* FinedustInfo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FinedustInfo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		04948CEF24511D010076BE47 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		04948CF324511D010076BE47 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
@@ -50,6 +49,8 @@
 		04ABEB7524667C8000D3392E /* FinedustInfoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FinedustInfoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		04ABEB7724667C8100D3392E /* FinedustInfoTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinedustInfoTests.swift; sourceTree = "<group>"; };
 		04ABEB7924667C8100D3392E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		04F6191324A2E270004F1A9B /* FinedustInfo.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = FinedustInfo.entitlements; sourceTree = "<group>"; };
+		04F6191624A2E8BB004F1A9B /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		059FB8B56EF369AA5194F249 /* Pods-FinedustInfo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FinedustInfo.release.xcconfig"; path = "Target Support Files/Pods-FinedustInfo/Pods-FinedustInfo.release.xcconfig"; sourceTree = "<group>"; };
 		764879B8272F41C8DC20F422 /* Pods-FinedustInfo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FinedustInfo.debug.xcconfig"; path = "Target Support Files/Pods-FinedustInfo/Pods-FinedustInfo.debug.xcconfig"; sourceTree = "<group>"; };
 		A1185E377F017CF9A0A6FF04 /* Pods_FinedustInfo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FinedustInfo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -86,7 +87,7 @@
 		04948CE324511D000076BE47 = {
 			isa = PBXGroup;
 			children = (
-				0492D39C2491B8AF0009B6DC /* GoogleService-Info.plist */,
+				04F6191624A2E8BB004F1A9B /* GoogleService-Info.plist */,
 				0492D386248F63D10009B6DC /* InfoPlist.strings */,
 				0492D380248F625E0009B6DC /* Localizable.strings */,
 				04948CEE24511D010076BE47 /* FinedustInfo */,
@@ -109,6 +110,7 @@
 		04948CEE24511D010076BE47 /* FinedustInfo */ = {
 			isa = PBXGroup;
 			children = (
+				04F6191324A2E270004F1A9B /* FinedustInfo.entitlements */,
 				041AC7D2247FA81000B3227D /* Model */,
 				04948CEF24511D010076BE47 /* AppDelegate.swift */,
 				04948CF324511D010076BE47 /* MainView.swift */,
@@ -232,7 +234,7 @@
 			files = (
 				04948CFC24511D060076BE47 /* LaunchScreen.storyboard in Resources */,
 				0492D384248F63D10009B6DC /* InfoPlist.strings in Resources */,
-				0492D39D2491B8AF0009B6DC /* GoogleService-Info.plist in Resources */,
+				04F6191724A2E8BB004F1A9B /* GoogleService-Info.plist in Resources */,
 				0492D37E248F625E0009B6DC /* Localizable.strings in Resources */,
 				04948CF924511D060076BE47 /* Assets.xcassets in Resources */,
 			);
@@ -472,14 +474,15 @@
 			baseConfigurationReference = 764879B8272F41C8DC20F422 /* Pods-FinedustInfo.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = FinedustInfo/FinedustInfo.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 2KMX75GUSK;
+				DEVELOPMENT_TEAM = KQS5CL5P74;
 				INFOPLIST_FILE = FinedustInfo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = roberthan.FinedustInfo;
+				PRODUCT_BUNDLE_IDENTIFIER = com.studiofirstzero.finedustinfo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -491,14 +494,15 @@
 			baseConfigurationReference = 059FB8B56EF369AA5194F249 /* Pods-FinedustInfo.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = FinedustInfo/FinedustInfo.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 2KMX75GUSK;
+				DEVELOPMENT_TEAM = KQS5CL5P74;
 				INFOPLIST_FILE = FinedustInfo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = roberthan.FinedustInfo;
+				PRODUCT_BUNDLE_IDENTIFIER = com.studiofirstzero.finedustinfo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

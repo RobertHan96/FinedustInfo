@@ -3,6 +3,8 @@ import CoreLocation
 import SwiftyJSON
 import Alamofire
 import Kingfisher
+import FirebaseMessaging
+import FirebaseInstanceID
 
 class MainController: MainViewController , CLLocationManagerDelegate{
     var locationManager : CLLocationManager!
@@ -16,12 +18,23 @@ class MainController: MainViewController , CLLocationManagerDelegate{
         super.viewDidLoad()
         setValues()
         refreshBtn.addTarget(self, action: #selector(refreshFinedustInfo(_:)), for: .touchUpInside)
+        printDeviceToken()
     }
     
     @objc func refreshFinedustInfo(_ sender : UIButton!) {
         setValues()
     }
-    
+
+    func printDeviceToken() {
+        InstanceID.instanceID().instanceID { (result, error) in
+          if let error = error {
+            print("Error fetching remote instance ID: \(error)")
+          } else if let result = result {
+            print("Remote instance ID token: \(result.token)")
+          }
+        }
+    }
+
     func locationPermissionCheck() -> Bool {
         let status = CLLocationManager.authorizationStatus()
         if status == CLAuthorizationStatus.denied || status == CLAuthorizationStatus.restricted {

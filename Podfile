@@ -12,5 +12,6 @@ target 'FinedustInfo' do
   pod 'SwiftyJSON', '~> 4.o'
   pod 'Kingfisher', '~> 5.0'
   pod 'Firebase/Analytics'
+  pod 'Firebase/Messaging'
   
 end
