@@ -8,6 +8,7 @@ import FirebaseInstanceID
 
 class MainController: MainViewController , CLLocationManagerDelegate{
     var locationManager : CLLocationManager!
+    let pushManager : PushServiceManager = PushServiceManager()
     private let serviceKey : String =        "Rj3kKMVbru0VayKTDlnSUCjbsuko3ZKRyXCKckQ%2Fe2lGHsThH3i6W07DfKPezNmNuAzD%2FpZBhOOTIGbIs3gOXg%3D%3D"
     var encodedUserProvince = ""
     var encodedUserCity = ""
@@ -18,21 +19,11 @@ class MainController: MainViewController , CLLocationManagerDelegate{
         super.viewDidLoad()
         setValues()
         refreshBtn.addTarget(self, action: #selector(refreshFinedustInfo(_:)), for: .touchUpInside)
-        printDeviceToken()
+        pushManager.registerTokenToDB()
     }
     
     @objc func refreshFinedustInfo(_ sender : UIButton!) {
         setValues()
-    }
-
-    func printDeviceToken() {
-        InstanceID.instanceID().instanceID { (result, error) in
-          if let error = error {
-            print("Error fetching remote instance ID: \(error)")
-          } else if let result = result {
-            print("Remote instance ID token: \(result.token)")
-          }
-        }
     }
 
     func locationPermissionCheck() -> Bool {
@@ -78,7 +69,7 @@ class MainController: MainViewController , CLLocationManagerDelegate{
                             let province = (address.last?.administrativeArea)! as String
                             let city = (address.last?.locality)! as String
                             let provinceShortForm = String(province[province.startIndex ..< province.index(province.startIndex, offsetBy: 2)])
-                            print("유저 위치 정보 : \(province)(\(provinceShortForm)) \(city)")
+                            print("Log : 유저위치 : \(province)(\(provinceShortForm)) \(city)")
                             self.encodedUserProvince = province.makeStringKoreanEncoded(provinceShortForm)
                             self.encodedUserCity = city.makeStringKoreanEncoded(city)
                             self.unEncodedUserCity = city
@@ -88,7 +79,7 @@ class MainController: MainViewController , CLLocationManagerDelegate{
                 }
             }
         } else {
-            print("위치 권한 요청 거부됨")
+            print("Log : 위치 권한 요청 거부됨")
         }
     }
     
@@ -102,7 +93,6 @@ class MainController: MainViewController , CLLocationManagerDelegate{
                 let finedustGradeName = FinedustInfo.getFinedustGradeName(data: nowFinedust.finedustGrade)
                 let userCityName = nowFinedust.cityName
                 let ultraFinedustGradeName = FinedustInfo.getFinedustGradeName(data: nowFinedust.ultraFineDustGrade)
-                
                 // 이미지 url 파싱 후 적용하는 부분
                 let url = URL(string: FinedustInfo.getImgUrl(gradeName: finedustGradeName))
                 let processor = DownsamplingImageProcessor(size: self.indicatorFaceImageView.bounds.size)
@@ -111,7 +101,6 @@ class MainController: MainViewController , CLLocationManagerDelegate{
                 self.indicatorFaceImageView.kf.setImage(with: url, options:
                     [ .processor(processor) ]
                 )
-
                 // 이미지 외 다른 UI컴포넌트에 값 할당
                 if userLanguage != "ko" {
                     self.LocationNameLabel.text = userCityName
@@ -124,10 +113,7 @@ class MainController: MainViewController , CLLocationManagerDelegate{
                 self.dateTimeLabel.text = String(nowFinedust.dateTime)
                 self.activityIndicator.stopAnimating()
             })
-            
         }
-
-
     }
 
 }

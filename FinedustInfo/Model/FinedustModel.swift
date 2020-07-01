@@ -54,7 +54,7 @@ class FinedustInfo {
                 let myCity = citis.filter { city -> Bool in
                     return city["cityName"].stringValue == cityName
                 }
-                print("파싱 결과 : ", myCity)
+                print("[Log] 파싱 결과 : ", myCity)
                 
                 let cityName = myCity.map{$0["cityNameEng"].stringValue}.last ?? ""
                 let pm10Value = myCity.map{$0["pm10Value"].intValue}.last ?? 1
@@ -63,7 +63,7 @@ class FinedustInfo {
                 let pm25Grade = pm25Value.checkFinedustGrade(data: pm25Value)
                 let datatime = myCity.map{$0["dataTime"].stringValue}.last ?? ""
                 
-                print("파싱된 시간 :", datatime)
+                print("[Log] 현재 시간 :", datatime)
                 let parsedData = FinedustInfo(cityName: cityName, pm10Value: pm10Value, pm10Grade: pm10Grade, pm25Value: pm25Value, pm25Grade: pm25Grade, dateTime: datatime)
                 
                 return parsedData
@@ -72,23 +72,39 @@ class FinedustInfo {
         }
     }
     
+    static func postDeviceToken(deviceToken : String) {
+        let localUrl = "http://127.0.0.1:8000/sendToken/"
+        let params = ["token": deviceToken]
+        AF.request(localUrl, method: .post, parameters: params , encoding:
+            URLEncoding(destination : .queryString), headers: ["Content-Type" : "application/json"]).responseJSON {
+         response in
+         switch response.result {
+                         case .success:
+                          print("[Log] \(response)")
+                          break
+
+                          case .failure(let error):
+                           print("[Log] \(error)")
+              }
+         }
+    }
     
     static func sendRequest(userLocation : String, cityName : String, serviceKey : String, completion:@escaping (FinedustInfo) -> Void) {
         let url = "http://openapi.airkorea.or.kr/openapi/services/rest/ArpltnInforInqireSvc/getCtprvnMesureSidoLIst?sidoName=\(userLocation)&searchCondition=DAILY&pageNo=1&numOfRows=20&ServiceKey=\(serviceKey)&ver=1.3(&_returnType=json"
 
-        print("API 요청 URL : ", url)
+        print("[Log] API 요청 URL : ", url)
         
         AF.request(url).validate(statusCode: 200..<300).responseJSON(completionHandler: { response in
             switch(response.result) {
             case .success(_) :
                 if let data = response.value {
-                    print(data)
+                    print("[Log] \(data)")
                 }
                 let data = FinedustInfo.getFinedustInfoFromJson(inputData: response.data!, cityName: cityName)
                 completion(data)
                 break ;
             case .failure(_) :
-                print("data request is failed, \(response.result)")
+                print("[Log] data request is failed, \(response.result)")
                 break;
             }
         }

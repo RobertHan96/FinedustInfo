@@ -4,6 +4,7 @@ import FirebaseMessaging
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, MessagingDelegate, UNUserNotificationCenterDelegate {
+    var DEVICE_TOKEN = ""
     var window: UIWindow?
     var navationController : UINavigationController?
     
