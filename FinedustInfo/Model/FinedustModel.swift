@@ -64,8 +64,15 @@ class FinedustInfo {
                 let datatime = myCity.map{$0["dataTime"].stringValue}.last ?? ""
                 
                 print("[Log] 현재 시간 :", datatime)
+
                 let parsedData = FinedustInfo(cityName: cityName, pm10Value: pm10Value, pm10Grade: pm10Grade, pm25Value: pm25Value, pm25Grade: pm25Grade, dateTime: datatime)
+
+//                미세먼지 좋음인 경우
+//                let parsedData = FinedustInfo(cityName: cityName, pm10Value: 12, pm10Grade: 1, pm25Value: 2, pm25Grade: 1, dateTime: datatime)
                 
+//                미세먼지 매우 나쁨인 경우
+//                let parsedData = FinedustInfo(cityName: cityName, pm10Value: 150, pm10Grade: 4, pm25Value: 80, pm25Grade: 4, dateTime: datatime)
+
                 return parsedData
             } else {
                 return FinedustInfo(cityName: "", pm10Value: 1, pm10Grade: 1, pm25Value: 1, pm25Grade: 1, dateTime: "")
@@ -73,7 +80,7 @@ class FinedustInfo {
     }
     
     static func postDeviceToken(deviceToken : String) {
-        let localUrl = "http://127.0.0.1:8000/sendToken/"
+        let localUrl = "http://3.34.98.184:5000/sendToken/"
         let params = ["token": deviceToken]
         AF.request(localUrl, method: .post, parameters: params , encoding:
             URLEncoding(destination : .queryString), headers: ["Content-Type" : "application/json"]).responseJSON {

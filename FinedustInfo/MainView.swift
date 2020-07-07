@@ -10,7 +10,7 @@ class MainViewController: UIViewController {
     }
     
     func setupUI() {
-        view.backgroundColor = .secondarySystemBackground
+        view.backgroundColor = .groupTableViewBackground
         view.addSubview(LocationNameLabel)
         view.addSubview(containerView)
         view.addSubview(dateTimeLabel)
