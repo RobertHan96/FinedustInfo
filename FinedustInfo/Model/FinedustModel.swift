@@ -80,7 +80,7 @@ class FinedustInfo {
     }
     
     static func postDeviceToken(deviceToken : String) {
-        let localUrl = "http://3.34.98.184:5000/sendToken/"
+        let localUrl = "http://13.124.81.229:8000/sendToken/"
         let params = ["token": deviceToken]
         AF.request(localUrl, method: .post, parameters: params , encoding:
             URLEncoding(destination : .queryString), headers: ["Content-Type" : "application/json"]).responseJSON {
