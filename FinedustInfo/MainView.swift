@@ -9,6 +9,10 @@ class MainViewController: UIViewController {
         makeConstraints()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        self.additionalSafeAreaInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+    }
+    
     func setupUI() {
         view.backgroundColor = .groupTableViewBackground
         view.addSubview(LocationNameLabel)
@@ -31,7 +35,7 @@ class MainViewController: UIViewController {
     
     func makeConstraints() {
         containerView.snp.makeConstraints { (make) in
-            make.top.equalTo(self.view.safeAreaLayoutGuide.snp.top).offset(30)
+            make.top.equalTo(self.view.safeAreaLayoutGuide.snp.top).offset(10)
             make.left.equalTo(self.view.safeAreaLayoutGuide.snp.left).offset(10)
             make.right.equalTo(self.view.safeAreaLayoutGuide.snp.right).offset(-10)
             make.bottom.equalTo(self.view.safeAreaLayoutGuide.snp.bottom).offset(-10)
@@ -112,7 +116,7 @@ class MainViewController: UIViewController {
             activityIndicator.stopAnimating()
             return activityIndicator }()
 
-    let containerView = UIView().then { _ in    }
+    let containerView = UIView().then {_ in }
     let detailInfoView = UIView().then {
         $0.layer.borderWidth = 1
         $0.layer.borderColor = UIColor.black.cgColor

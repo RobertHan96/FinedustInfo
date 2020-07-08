@@ -32,8 +32,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, MessagingDelegate, UNUser
         window = UIWindow(frame: UIScreen.main.bounds)
         if let window = window {
             let mainVC = MainController()
-            navationController = UINavigationController(rootViewController: mainVC)
-            window.rootViewController = navationController
+            window.rootViewController = mainVC
             window.makeKeyAndVisible()
         }
         if #available(iOS 13.0, *){
