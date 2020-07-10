@@ -3,22 +3,22 @@ import FirebaseMessaging
 import FirebaseInstanceID
 
 class PushServiceManager {
-    let userDefaults = UserDefaults.standard
+    static let DEVICE_TOKEN = UserDefaults.standard.string(forKey: "token")
     
-    func registerTokenToDB() {
+    static func registerTokenToDB(userToken : String) {
         InstanceID.instanceID().instanceID { (result, error) in
           if let error = error {
             print("Error fetching remote instance ID: \(error)")
-          } else if let result = result {
-            print("Remote instance ID token: \(result.token)")
-            if self.userDefaults.string(forKey: "token") == nil {
-                FinedustInfo.postDeviceToken(deviceToken: result.token)
-                self.userDefaults.set(result.token, forKey: "token")
+          } else if let result = result{
+            if result.token != DEVICE_TOKEN  {
+                FinedustInfo.postDeviceToken(deviceToken: userToken)
+                UserDefaults.standard.set(result.token, forKey: "token")
             } else {
-                print("[Log] : 디바이스 토큰이 이미 등록되어 있습니다.")
+                print("[Log] 이미 등록된 토큰")
             }
-          }
+        }
+        
         }
     }
-
+    
 }

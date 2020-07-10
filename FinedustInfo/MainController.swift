@@ -8,7 +8,6 @@ import FirebaseInstanceID
 
 class MainController: MainViewController , CLLocationManagerDelegate{
     var locationManager : CLLocationManager!
-    let pushManager : PushServiceManager = PushServiceManager()
     private let serviceKey : String =        "Rj3kKMVbru0VayKTDlnSUCjbsuko3ZKRyXCKckQ%2Fe2lGHsThH3i6W07DfKPezNmNuAzD%2FpZBhOOTIGbIs3gOXg%3D%3D"
     var encodedUserProvince = ""
     var encodedUserCity = ""
@@ -19,13 +18,12 @@ class MainController: MainViewController , CLLocationManagerDelegate{
         super.viewDidLoad()
         setValues()
         refreshBtn.addTarget(self, action: #selector(refreshFinedustInfo(_:)), for: .touchUpInside)
-        pushManager.registerTokenToDB()
     }
     
     @objc func refreshFinedustInfo(_ sender : UIButton!) {
         setValues()
     }
-
+    
     func locationPermissionCheck() -> Bool {
         let status = CLLocationManager.authorizationStatus()
         if status == CLAuthorizationStatus.denied || status == CLAuthorizationStatus.restricted {
