@@ -16,14 +16,31 @@ class MainController: MainViewController , CLLocationManagerDelegate{
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setValues()
         refreshBtn.addTarget(self, action: #selector(refreshFinedustInfo(_:)), for: .touchUpInside)
+        DispatchQueue.global(qos: .userInitiated).async {
+            self.fetchUserLocation()
+            DispatchQueue.main.async {
+                self.getFinedustInfo()
+            }
+        }
+    }
+
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(true)
+        DispatchQueue.global(qos: .userInitiated).async {
+            let delay = DispatchTime.now() + .milliseconds(500)
+            self.fetchUserLocation()
+            DispatchQueue.main.asyncAfter(deadline: delay) {
+                self.getFinedustInfo()
+            }
+        }
     }
     
     @objc func refreshFinedustInfo(_ sender : UIButton!) {
-        setValues()
+        fetchUserLocation()
+        getFinedustInfo()
     }
-    
+
     func locationPermissionCheck() -> Bool {
         let status = CLLocationManager.authorizationStatus()
         if status == CLAuthorizationStatus.denied || status == CLAuthorizationStatus.restricted {
@@ -47,7 +64,7 @@ class MainController: MainViewController , CLLocationManagerDelegate{
         } else {
             return true
         }
-    }
+    } // fetchUserLocation
     
     func fetchUserLocation(){
         locationManager = CLLocationManager()
@@ -79,39 +96,43 @@ class MainController: MainViewController , CLLocationManagerDelegate{
         } else {
             print("Log : 위치 권한 요청 거부됨")
         }
-    }
+    } // fetchUserLocation
+        
+    func getFinedustInfo() {
+        FinedustInfo.sendRequest(userLocation: self.encodedUserProvince, cityName: self.unEncodedUserCity, serviceKey: self.serviceKey, completion: { (nowFinedust) in
+            let userLanguage = Locale.current.languageCode
+            let finedustIndex = String(nowFinedust.finedustValue)
+            let finedustGrade = FinedustInfo.getFinedustGradeName(data: nowFinedust.finedustGrade)
+            let city = nowFinedust.cityName
+            let ultraFinedustIndex = String(nowFinedust.ultraFineDuestValue)
+            let ultraFinedustGrade = FinedustInfo.getFinedustGradeName(data: nowFinedust.ultraFineDustGrade)
+            let time = String(nowFinedust.dateTime)
+            // 이미지 url 파싱 후 적용하는 부분
+            let url = URL(string: FinedustInfo.getImgUrl(gradeName: finedustGrade))
+                if userLanguage != "ko" { self.LocationNameLabel.text = city }
+            self.setupUI(fGrade: finedustGrade, fIndex: finedustIndex, ufGrade: ultraFinedustGrade, ufindex: ultraFinedustIndex, time: time, imgUrl: url!)
+            // DispatchQueue.main.async
+        }) // FineduestInfo.sendRequst
+    } // getInfo Function
     
-    func setValues() {
-        activityIndicator.startAnimating()
-        fetchUserLocation()
-        DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1500)) {
-            FinedustInfo.sendRequest(userLocation: self.encodedUserProvince, cityName: self.unEncodedUserCity, serviceKey: self.serviceKey, completion: { (nowFinedust) in
-    
-                let userLanguage = Locale.current.languageCode
-                let finedustGradeName = FinedustInfo.getFinedustGradeName(data: nowFinedust.finedustGrade)
-                let userCityName = nowFinedust.cityName
-                let ultraFinedustGradeName = FinedustInfo.getFinedustGradeName(data: nowFinedust.ultraFineDustGrade)
-                // 이미지 url 파싱 후 적용하는 부분
-                let url = URL(string: FinedustInfo.getImgUrl(gradeName: finedustGradeName))
-                let processor = DownsamplingImageProcessor(size: self.indicatorFaceImageView.bounds.size)
-                    |> RoundCornerImageProcessor(cornerRadius: 100)
-                self.indicatorFaceImageView.kf.indicatorType = .activity
-                self.indicatorFaceImageView.kf.setImage(with: url, options:
-                    [ .processor(processor) ]
-                )
-                // 이미지 외 다른 UI컴포넌트에 값 할당
-                if userLanguage != "ko" {
-                    self.LocationNameLabel.text = userCityName
-                }
-                self.indicatorLabel.text = finedustGradeName
-                self.finedustIndexLabel.text =  String(nowFinedust.finedustValue)
-                self.finedustGradeLabel.text = finedustGradeName
-                self.ultraFinedustIndexLabel.text =  String(nowFinedust.ultraFineDuestValue)
-                self.ultraFinedustGradeLabel.text = ultraFinedustGradeName
-                self.dateTimeLabel.text = String(nowFinedust.dateTime)
-                self.activityIndicator.stopAnimating()
-            })
-        }
-    }
+    func setupUI(fGrade : String, fIndex : String, ufGrade : String,
+                 ufindex: String, time : String, imgUrl : URL) {
+        self.activityIndicator.startAnimating()
+        let processor = DownsamplingImageProcessor(size: self.indicatorFaceImageView.bounds.size)
+            |> RoundCornerImageProcessor(cornerRadius: 100)
+        self.indicatorFaceImageView.kf.indicatorType = .activity
+        self.indicatorFaceImageView.kf.setImage(with: imgUrl, options:
+            [ .processor(processor) ])
+
+        self.indicatorLabel.text = fGrade
+        self.finedustIndexLabel.text = fIndex
+        self.finedustGradeLabel.text = fGrade
+        self.ultraFinedustIndexLabel.text = ufindex
+        self.ultraFinedustGradeLabel.text = ufGrade
+        self.dateTimeLabel.text = time
+        self.activityIndicator.stopAnimating()
+        self.view.layoutIfNeeded()
+        print("[Log] UI셋팅 완료")
+    } // setupUI
 
 }
