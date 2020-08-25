@@ -123,7 +123,7 @@ class MainController: MainViewController , CLLocationManagerDelegate{
         if fGrade == "Moderate" {
             self.view.backgroundColor = .systemPurple
             self.containerView.image = UIImage(named: "good")
-            self.LocationNameLabel.bringSubviewToFront(containerView)
+            self.containerView.bringSubviewToFront(LocationNameLabel)
         }
         let processor = DownsamplingImageProcessor(size: self.indicatorFaceImageView.bounds.size)
             |> RoundCornerImageProcessor(cornerRadius: 100)
