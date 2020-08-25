@@ -118,6 +118,13 @@ class MainController: MainViewController , CLLocationManagerDelegate{
     func setupUI(fGrade : String, fIndex : String, ufGrade : String,
                  ufindex: String, time : String, imgUrl : URL) {
         self.activityIndicator.startAnimating()
+        
+        // switch-case 문으로 분기처리해서 농도별 이미지 바꾸기 (url 이용)
+        if fGrade == "Moderate" {
+            self.view.backgroundColor = .systemPurple
+            self.containerView.image = UIImage(named: "good")
+            self.LocationNameLabel.bringSubviewToFront(containerView)
+        }
         let processor = DownsamplingImageProcessor(size: self.indicatorFaceImageView.bounds.size)
             |> RoundCornerImageProcessor(cornerRadius: 100)
         self.indicatorFaceImageView.kf.indicatorType = .activity

@@ -32,16 +32,25 @@ class MainViewController: UIViewController {
         view.addSubview(refreshBtn)
     }
     
-    
+
     func makeConstraints() {
         containerView.snp.makeConstraints { (make) in
-            make.top.equalTo(self.view.safeAreaLayoutGuide.snp.top).offset(10)
-            make.left.equalTo(self.view.safeAreaLayoutGuide.snp.left).offset(10)
-            make.right.equalTo(self.view.safeAreaLayoutGuide.snp.right).offset(-10)
-            make.bottom.equalTo(self.view.safeAreaLayoutGuide.snp.bottom).offset(-10)
+            make.top.equalTo(self.view.snp.top).offset(0)
+            make.left.equalTo(self.view.snp.left).offset(0)
+            make.right.equalTo(self.view.snp.right).offset(0)
+            make.bottom.equalTo(self.view.snp.bottom).offset(0)
         }
+
+//    func makeConstraints() {
+//        containerView.snp.makeConstraints { (make) in
+//            make.top.equalTo(self.view.safeAreaLayoutGuide.snp.top).offset(10)
+//            make.left.equalTo(self.view.safeAreaLayoutGuide.snp.left).offset(10)
+//            make.right.equalTo(self.view.safeAreaLayoutGuide.snp.right).offset(-10)
+//            make.bottom.equalTo(self.view.safeAreaLayoutGuide.snp.bottom).offset(-10)
+//        }
         locationImageView.snp.makeConstraints { (make) in
-            make.top.equalTo(self.containerView.snp.top).offset(0)
+            let height =  UIApplication.shared.statusBarFrame.height + 10
+            make.top.equalTo(self.containerView.snp.top).offset(height)
             make.left.equalTo(self.view.safeAreaLayoutGuide.snp.left).offset(20)
             make.height.equalTo(15)
             make.width.equalTo(20)
@@ -116,7 +125,8 @@ class MainViewController: UIViewController {
             activityIndicator.stopAnimating()
             return activityIndicator }()
 
-    let containerView = UIView().then {_ in }
+    let containerView = UIImageView().then {_ in }
+
     let detailInfoView = UIView().then {
         $0.layer.borderWidth = 1
         $0.layer.borderColor = UIColor.black.cgColor
