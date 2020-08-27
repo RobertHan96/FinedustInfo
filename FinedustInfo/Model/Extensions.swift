@@ -5,10 +5,13 @@ extension String {
         return string.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? string
     }
     
-    var localized: String {
+    var localized : String {
           return NSLocalizedString(self, tableName: "Localizable", value: self, comment: "")
-
        }
+    var finedustGradeGood : String { return "Good" }
+    var finedustGradeModerate : String { return "Moderate" }
+    var finedustGradeBad : String { return "Bad" }
+
 }
 
 extension Int {

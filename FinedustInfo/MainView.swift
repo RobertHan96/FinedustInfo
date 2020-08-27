@@ -14,7 +14,7 @@ class MainViewController: UIViewController {
     }
     
     func setupUI() {
-        view.backgroundColor = .groupTableViewBackground
+        view.addSubview(backgroundImageView)
         view.addSubview(LocationNameLabel)
         view.addSubview(containerView)
         view.addSubview(dateTimeLabel)
@@ -34,20 +34,18 @@ class MainViewController: UIViewController {
     
 
     func makeConstraints() {
+        backgroundImageView.snp.makeConstraints { (make) in
+            make.top.equalTo(self.view.snp.top).offset(0)
+            make.left.equalTo(self.view.snp.left).offset(-100)
+            make.right.equalTo(self.view.snp.right).offset(0)
+            make.bottom.equalTo(self.view.snp.bottom).offset(0)
+        }
         containerView.snp.makeConstraints { (make) in
             make.top.equalTo(self.view.snp.top).offset(0)
             make.left.equalTo(self.view.snp.left).offset(0)
             make.right.equalTo(self.view.snp.right).offset(0)
             make.bottom.equalTo(self.view.snp.bottom).offset(0)
         }
-
-//    func makeConstraints() {
-//        containerView.snp.makeConstraints { (make) in
-//            make.top.equalTo(self.view.safeAreaLayoutGuide.snp.top).offset(10)
-//            make.left.equalTo(self.view.safeAreaLayoutGuide.snp.left).offset(10)
-//            make.right.equalTo(self.view.safeAreaLayoutGuide.snp.right).offset(-10)
-//            make.bottom.equalTo(self.view.safeAreaLayoutGuide.snp.bottom).offset(-10)
-//        }
         locationImageView.snp.makeConstraints { (make) in
             let height =  UIApplication.shared.statusBarFrame.height + 10
             make.top.equalTo(self.containerView.snp.top).offset(height)
@@ -125,6 +123,7 @@ class MainViewController: UIViewController {
             activityIndicator.stopAnimating()
             return activityIndicator }()
 
+    let backgroundImageView = UIImageView().then {_ in}
     let containerView = UIImageView().then {_ in }
 
     let detailInfoView = UIView().then {
@@ -133,6 +132,7 @@ class MainViewController: UIViewController {
         $0.layer.cornerRadius = 10
     }
     let locationImageView = UIImageView().then {
+                // 하드 코딩된 텍스트 따로 빼기
         let locationIcon = UIImage(named: "pin")
         $0.image = locationIcon
     }
@@ -143,26 +143,31 @@ class MainViewController: UIViewController {
         $0.textColor = .black
     }
     let refreshBtn = UIButton().then {
+        // 하드 코딩된 텍스트 따로 빼기
         let image = UIImage(named: "refresh")
         $0.setImage(image, for: .normal)
     }
     let indicatorFaceImageView = UIImageView().then {
+                // 하드 코딩된 텍스트 따로 빼기
         let face = UIImage(named: "fail_to_load")
         $0.image = face
     }
     let indicatorLabel = UILabel().then {
+        // 하드 코딩된 텍스트 따로 빼기
         $0.text = "매우 좋음"
         $0.adjustsFontSizeToFitWidth = true
         $0.font = UIFont.systemFont(ofSize: 35)
         $0.textColor = .black
     }
     let finedustNameLabel = UILabel().then {
+        // 하드 코딩된 텍스트 따로 빼기
         $0.text = "finedust".localized
         $0.adjustsFontSizeToFitWidth = true
         $0.font = UIFont.systemFont(ofSize: 24)
         $0.textColor = .black
     }
     let ultraFinedustNameLabel = UILabel().then {
+        // 하드 코딩된 텍스트 따로 빼기
         $0.text = "ultraFinedust".localized
         $0.adjustsFontSizeToFitWidth = true
         $0.font = UIFont.systemFont(ofSize: 24)

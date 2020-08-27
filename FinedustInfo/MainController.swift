@@ -8,7 +8,6 @@ import FirebaseInstanceID
 
 class MainController: MainViewController , CLLocationManagerDelegate{
     var locationManager : CLLocationManager!
-    private let serviceKey : String =        "Rj3kKMVbru0VayKTDlnSUCjbsuko3ZKRyXCKckQ%2Fe2lGHsThH3i6W07DfKPezNmNuAzD%2FpZBhOOTIGbIs3gOXg%3D%3D"
     var encodedUserProvince = ""
     var encodedUserCity = ""
     var unEncodedUserCity = ""
@@ -16,6 +15,7 @@ class MainController: MainViewController , CLLocationManagerDelegate{
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        animbackgroundImage()
         refreshBtn.addTarget(self, action: #selector(refreshFinedustInfo(_:)), for: .touchUpInside)
         DispatchQueue.global(qos: .userInitiated).async {
             self.fetchUserLocation()
@@ -23,6 +23,12 @@ class MainController: MainViewController , CLLocationManagerDelegate{
                 self.getFinedustInfo()
             }
         }
+    }
+    
+    func animbackgroundImage() {
+        UIView.animate(withDuration: 20, delay: 1, options: [.repeat, .autoreverse], animations: {
+            self.backgroundImageView.center.x = -100
+        })
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -99,17 +105,18 @@ class MainController: MainViewController , CLLocationManagerDelegate{
     } // fetchUserLocation
         
     func getFinedustInfo() {
-        FinedustInfo.sendRequest(userLocation: self.encodedUserProvince, cityName: self.unEncodedUserCity, serviceKey: self.serviceKey, completion: { (nowFinedust) in
+        let apiKey = FinedustInfo().
+        FinedustInfo.sendRequest(userLocation: self.encodedUserProvince, cityName: self.unEncodedUserCity, serviceKey: apiKey , completion: { (nowFinedust) in
             let userLanguage = Locale.current.languageCode
             let finedustIndex = String(nowFinedust.finedustValue)
-            let finedustGrade = FinedustInfo.getFinedustGradeName(data: nowFinedust.finedustGrade)
+            let indecatorImageSelector = IndecatorImgeSelector(finedustGrade: nowFinedust.finedustGrade, ultraFinedustGrade: nowFinedust.ultraFineDustGrade)
             let city = nowFinedust.cityName
             let ultraFinedustIndex = String(nowFinedust.ultraFineDuestValue)
-            let ultraFinedustGrade = FinedustInfo.getFinedustGradeName(data: nowFinedust.ultraFineDustGrade)
+            let ultraFinedustGrade = indecatorImageSelector.getUltraFinedustGradeName
+            let finedustGrade = indecatorImageSelector.getFinedustGradeName
             let time = String(nowFinedust.dateTime)
-            // 이미지 url 파싱 후 적용하는 부분
-            let url = URL(string: FinedustInfo.getImgUrl(gradeName: finedustGrade))
-                if userLanguage != "ko" { self.LocationNameLabel.text = city }
+            let url = URL(string: indecatorImageSelector.getImageUrl)
+            if userLanguage != "ko" { self.LocationNameLabel.text = city }
             self.setupUI(fGrade: finedustGrade, fIndex: finedustIndex, ufGrade: ultraFinedustGrade, ufindex: ultraFinedustIndex, time: time, imgUrl: url!)
             // DispatchQueue.main.async
         }) // FineduestInfo.sendRequst
@@ -118,19 +125,13 @@ class MainController: MainViewController , CLLocationManagerDelegate{
     func setupUI(fGrade : String, fIndex : String, ufGrade : String,
                  ufindex: String, time : String, imgUrl : URL) {
         self.activityIndicator.startAnimating()
-        
-        // switch-case 문으로 분기처리해서 농도별 이미지 바꾸기 (url 이용)
-        if fGrade == "Moderate" {
-            self.view.backgroundColor = .systemPurple
-            self.containerView.image = UIImage(named: "good")
-            self.containerView.bringSubviewToFront(LocationNameLabel)
-        }
-        let processor = DownsamplingImageProcessor(size: self.indicatorFaceImageView.bounds.size)
+        setBackgroundImagebyFinedustGrade(grade: fGrade)
+        let imageSize =  self.indicatorFaceImageView.bounds.size
+        let processor = DownsamplingImageProcessor(size: imageSize)
             |> RoundCornerImageProcessor(cornerRadius: 100)
         self.indicatorFaceImageView.kf.indicatorType = .activity
         self.indicatorFaceImageView.kf.setImage(with: imgUrl, options:
             [ .processor(processor) ])
-
         self.indicatorLabel.text = fGrade
         self.finedustIndexLabel.text = fIndex
         self.finedustGradeLabel.text = fGrade
@@ -142,4 +143,17 @@ class MainController: MainViewController , CLLocationManagerDelegate{
         print("[Log] UI셋팅 완료")
     } // setupUI
 
+    func setBackgroundImagebyFinedustGrade(grade : String) {
+        switch grade {
+            case grade.finedustGradeBad :
+                    self.backgroundImageView.image = UIImage(named: grade.finedustGradeBad)
+                    self.view.bringSubviewToFront(LocationNameLabel)
+            case grade.finedustGradeModerate :
+                    self.backgroundImageView.image = UIImage(named: grade.finedustGradeModerate)
+                    self.view.bringSubviewToFront(LocationNameLabel)
+            default:
+                self.backgroundImageView.image = UIImage(named: grade.finedustGradeGood)
+                self.view.bringSubviewToFront(LocationNameLabel)
+        }
+    }
 }
