@@ -3,18 +3,7 @@ import Foundation
 struct IndecatorImgeSelector {
     var finedustGrade : Int = 0
     var ultraFinedustGrade : Int = 0
-    var getFinedustGradeName : String {
-        var result = "good"
-        switch self.finedustGrade {
-        case 2 :
-            result = "moderate"
-        case 3, 4 :
-            result = "bad"
-        default:
-            result = "good"
-        }
-        return result
-    }
+
     var getImageUrl : String {
         var result = ""
         let urlForGood : String = "http://asq.kr/QWBlyVLUMP4J"
@@ -38,13 +27,15 @@ struct IndecatorImgeSelector {
         return result
     }
 
-    var getUltraFinedustGradeName : String {
-        var result = "good"
+    var getFinedustGradeName : String {
+        var result = "finedustGood".localized
         switch self.ultraFinedustGrade {
-        case 2 :
-            result = "moderate"
-        case 3, 4 :
-            result = "bad"
+        case IndicatorGradeCase.moderate.rawValue :
+            result = "finedustModerate".localized
+        case IndicatorGradeCase.bad.rawValue :
+            result = "finedustbad".localized
+        case IndicatorGradeCase.veryBad.rawValue :
+            result = "finedustVeryBad".localized
         default:
             result = "good"
         }
@@ -65,4 +56,11 @@ struct IndecatorImgeSelector {
             3:"finedustbad".localized, 4:"finedustVeryBad".localized]
         return results[data] ?? "알 수 없음"
     }
+}
+
+enum IndicatorGradeCase : Int {
+    case good = 1
+    case moderate = 2
+    case bad = 3
+    case veryBad = 4
 }

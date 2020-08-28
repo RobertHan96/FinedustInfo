@@ -112,7 +112,7 @@ class MainController: MainViewController , CLLocationManagerDelegate{
             let indecatorImageSelector = IndecatorImgeSelector(finedustGrade: nowFinedust.finedustGrade, ultraFinedustGrade: nowFinedust.ultraFineDustGrade)
             let city = nowFinedust.cityName
             let ultraFinedustIndex = String(nowFinedust.ultraFineDuestValue)
-            let ultraFinedustGrade = indecatorImageSelector.getUltraFinedustGradeName
+            let ultraFinedustGrade = indecatorImageSelector.getFinedustGradeName
             let finedustGrade = indecatorImageSelector.getFinedustGradeName
             let time = String(nowFinedust.dateTime)
             let url = URL(string: indecatorImageSelector.getImageUrl)
