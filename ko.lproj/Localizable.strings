@@ -15,3 +15,6 @@
 "finedustIndexDefaultText" ="-";
 "finedust" ="미세 먼지";
 "ultraFinedust" ="초미세 먼지";
+
+"yesAlertBtnTitle" = "네";
+"noAlertBtnTitle" = "아니오";

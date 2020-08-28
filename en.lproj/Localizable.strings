@@ -15,3 +15,6 @@
 "finedustIndexDefaultText" ="-";
 "finedust" ="Finedust";
 "ultraFinedust" ="Utlra Finedust";
+
+"yesAlertBtnTitle" = "yes";
+"noAlertBtnTitle" = "no";

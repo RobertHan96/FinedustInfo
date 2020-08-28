@@ -31,7 +31,7 @@ extension Int {
 
 extension UIAlertController {
     func okAction() -> UIAlertAction {
-        let okAction = UIAlertAction(title: "네", style: UIAlertAction.Style.default){ (action: UIAlertAction) in
+        let okAction = UIAlertAction(title: "yesAlertBtnTitle".localized, style: UIAlertAction.Style.default){ (action: UIAlertAction) in
             if #available(iOS 10.0, *) {
                 UIApplication.shared.open(NSURL(string:UIApplication.openSettingsURLString)! as URL)
             } else {
@@ -42,7 +42,7 @@ extension UIAlertController {
     }
     
     func noAction() -> UIAlertAction {
-        let noAction = UIAlertAction(title: "아니오", style: UIAlertAction.Style.destructive){
+        let noAction = UIAlertAction(title: "noAlertBtnTitle".localized, style: UIAlertAction.Style.destructive){
             (action: UIAlertAction) in
             exit(0)}
         return noAction
