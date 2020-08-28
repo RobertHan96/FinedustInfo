@@ -138,7 +138,6 @@ class MainViewController: UIViewController {
         $0.textColor = .black
     }
     let refreshBtn = UIButton().then {
-        print("[Log tranlate]", "refreschBtnImageName".localized )
         let image = UIImage(named: "refreschBtnImageName".localized)
         $0.setImage(image, for: .normal)
     }

@@ -44,10 +44,9 @@ class FinedustInfo {
     }
     
     static func postDeviceToken(deviceToken : String) {
-        // 하드코딩된 부분 PushServiceManager로 이동
-        let localUrl = "http://13.124.81.229:8000/sendToken/"
+        let pushServer = PushServiceManager.pushServerUrl
         let params = ["token": deviceToken]
-        AF.request(localUrl, method: .post, parameters: params , encoding:
+        AF.request(pushServer, method: .post, parameters: params , encoding:
             URLEncoding(destination : .queryString), headers: ["Content-Type" : "application/json"]).responseJSON {
          response in
          switch response.result {
@@ -62,7 +61,6 @@ class FinedustInfo {
     }
     
     static func sendRequest(userLocation : String, cityName : String, serviceKey : String, completion:@escaping (FinedustInfo) -> Void) {
-        // 하드코딩된 부분 PushServiceManager로 이동
         let queryUrl = "http://openapi.airkorea.or.kr/openapi/services/rest/ArpltnInforInqireSvc/getCtprvnMesureSidoLIst?sidoName=\(userLocation)&searchCondition=DAILY&pageNo=1&numOfRows=20&ServiceKey=\(serviceKey)&ver=1.3(&_returnType=json"
         AF.request(queryUrl).validate(statusCode: 200..<300).responseJSON(completionHandler: { response in
             switch(response.result) {
