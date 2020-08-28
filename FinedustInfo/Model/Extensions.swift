@@ -1,4 +1,5 @@
 import Foundation
+import UIKit
 
 extension String {
     func makeStringKoreanEncoded(_ string: String) -> String {
@@ -27,5 +28,32 @@ extension Int {
         }
     }
 }
+
+extension UIAlertController {
+    func okAction() -> UIAlertAction {
+        let okAction = UIAlertAction(title: "네", style: UIAlertAction.Style.default){ (action: UIAlertAction) in
+            if #available(iOS 10.0, *) {
+                UIApplication.shared.open(NSURL(string:UIApplication.openSettingsURLString)! as URL)
+            } else {
+                UIApplication.shared.openURL(NSURL(string: UIApplication.openSettingsURLString)! as URL)
+            }
+        }
+        return okAction
+    }
+    
+    func noAction() -> UIAlertAction {
+        let noAction = UIAlertAction(title: "아니오", style: UIAlertAction.Style.destructive){
+            (action: UIAlertAction) in
+            exit(0)}
+        return noAction
+    }
+    
+    func setupAlertActions() {
+        self.addAction(okAction())
+        self.addAction(noAction())
+    }
+
+}
+
 
 

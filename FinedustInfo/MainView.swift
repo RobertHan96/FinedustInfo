@@ -7,10 +7,17 @@ class MainViewController: UIViewController {
         super.viewDidLoad()
         setupUI()
         makeConstraints()
+        animbackgroundImage()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         self.additionalSafeAreaInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+    }
+
+    func animbackgroundImage() {
+        UIView.animate(withDuration: 20, delay: 1, options: [.repeat, .autoreverse], animations: {
+            self.backgroundImageView.center.x = -100
+        })
     }
     
     func setupUI() {
@@ -104,12 +111,12 @@ class MainViewController: UIViewController {
             make.centerX.equalTo(self.ultraFinedustGradeLabel).offset(0)
         }
         dateTimeLabel.snp.makeConstraints { (make) in
-            make.bottom.equalTo(self.containerView.snp.bottom).offset(-10)
+            make.bottom.equalTo(self.containerView.snp.bottom).offset(-15)
             make.left.equalTo(self.containerView.snp.left).offset(20)
             make.right.equalTo(self.containerView.snp.right).offset(-20)
         }
     }
-
+            
     lazy var activityIndicator: UIActivityIndicatorView = {
             let activityIndicator = UIActivityIndicatorView()
             activityIndicator.frame = CGRect(x: 0, y: 0, width: 50, height: 50)
@@ -195,4 +202,3 @@ class MainViewController: UIViewController {
     }
 
 }
-
