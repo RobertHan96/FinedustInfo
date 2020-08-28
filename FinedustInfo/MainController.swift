@@ -105,8 +105,8 @@ class MainController: MainViewController , CLLocationManagerDelegate{
     } // fetchUserLocation
         
     func getFinedustInfo() {
-        let apiKey = FinedustInfo().
-        FinedustInfo.sendRequest(userLocation: self.encodedUserProvince, cityName: self.unEncodedUserCity, serviceKey: apiKey , completion: { (nowFinedust) in
+        let key = FinedustInfo.apiKey
+        FinedustInfo.sendRequest(userLocation: self.encodedUserProvince, cityName: self.unEncodedUserCity, serviceKey: key , completion: { (nowFinedust) in
             let userLanguage = Locale.current.languageCode
             let finedustIndex = String(nowFinedust.finedustValue)
             let indecatorImageSelector = IndecatorImgeSelector(finedustGrade: nowFinedust.finedustGrade, ultraFinedustGrade: nowFinedust.ultraFineDustGrade)

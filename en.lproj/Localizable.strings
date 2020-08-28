@@ -7,3 +7,11 @@
 "finedustModerate" = "Moderate";
 "finedustbad" = "Bad";
 "finedustVeryBad" = "Very bad";
+
+"locationIndicatorImageName" ="pin";
+"refreschBtnImageName" ="refresh";
+"loadFailErrorImageName" ="fail_to_load";
+"finedustGradeDefaultText" ="Good";
+"finedustIndexDefaultText" ="-";
+"finedust" ="Finedust";
+"ultraFinedust" ="Utlra Finedust";

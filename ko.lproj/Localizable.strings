@@ -7,3 +7,11 @@
 "finedustModerate" = "보통";
 "finedustbad" = "나쁨";
 "finedustVeryBad" = "매우나쁨";
+
+"locationIndicatorImageName" ="pin";
+"refreschBtnImageName" ="refresh";
+"loadFailErrorImageName" ="fail_to_load";
+"finedustGradeDefaultText" ="매우 좋음";
+"finedustIndexDefaultText" ="-";
+"finedust" ="미세 먼지";
+"ultraFinedust" ="초미세 먼지";

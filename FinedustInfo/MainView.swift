@@ -31,7 +31,6 @@ class MainViewController: UIViewController {
         view.addSubview(activityIndicator)
         view.addSubview(refreshBtn)
     }
-    
 
     func makeConstraints() {
         backgroundImageView.snp.makeConstraints { (make) in
@@ -116,24 +115,20 @@ class MainViewController: UIViewController {
             activityIndicator.frame = CGRect(x: 0, y: 0, width: 50, height: 50)
             activityIndicator.center = self.view.center
             activityIndicator.color = UIColor.red
-            // Also show the indicator even when the animation is stopped.
             activityIndicator.hidesWhenStopped = true
             activityIndicator.style = UIActivityIndicatorView.Style.white
-            // Start animation.
             activityIndicator.stopAnimating()
             return activityIndicator }()
-
+    
     let backgroundImageView = UIImageView().then {_ in}
     let containerView = UIImageView().then {_ in }
-
     let detailInfoView = UIView().then {
         $0.layer.borderWidth = 1
         $0.layer.borderColor = UIColor.black.cgColor
         $0.layer.cornerRadius = 10
     }
     let locationImageView = UIImageView().then {
-                // 하드 코딩된 텍스트 따로 빼기
-        let locationIcon = UIImage(named: "pin")
+        let locationIcon = UIImage(named: "locationIndicatorImageName".localized)
         $0.image = locationIcon
     }
     let LocationNameLabel = UILabel().then {
@@ -143,31 +138,27 @@ class MainViewController: UIViewController {
         $0.textColor = .black
     }
     let refreshBtn = UIButton().then {
-        // 하드 코딩된 텍스트 따로 빼기
-        let image = UIImage(named: "refresh")
+        print("[Log tranlate]", "refreschBtnImageName".localized )
+        let image = UIImage(named: "refreschBtnImageName".localized)
         $0.setImage(image, for: .normal)
     }
     let indicatorFaceImageView = UIImageView().then {
-                // 하드 코딩된 텍스트 따로 빼기
-        let face = UIImage(named: "fail_to_load")
+        let face = UIImage(named: "loadFailErrorImageName".localized)
         $0.image = face
     }
     let indicatorLabel = UILabel().then {
-        // 하드 코딩된 텍스트 따로 빼기
-        $0.text = "매우 좋음"
+        $0.text = "finedustGradeDefaultText".localized
         $0.adjustsFontSizeToFitWidth = true
         $0.font = UIFont.systemFont(ofSize: 35)
         $0.textColor = .black
     }
     let finedustNameLabel = UILabel().then {
-        // 하드 코딩된 텍스트 따로 빼기
         $0.text = "finedust".localized
         $0.adjustsFontSizeToFitWidth = true
         $0.font = UIFont.systemFont(ofSize: 24)
         $0.textColor = .black
     }
     let ultraFinedustNameLabel = UILabel().then {
-        // 하드 코딩된 텍스트 따로 빼기
         $0.text = "ultraFinedust".localized
         $0.adjustsFontSizeToFitWidth = true
         $0.font = UIFont.systemFont(ofSize: 24)
@@ -186,19 +177,19 @@ class MainViewController: UIViewController {
         $0.textColor = .black
     }
     let finedustIndexLabel = UILabel().then {
-        $0.text = "00"
+        $0.text = "finedustIndexDefaultText".localized
         $0.adjustsFontSizeToFitWidth = true
         $0.font = UIFont.boldSystemFont(ofSize: 24)
         $0.textColor = .black
     }
     let ultraFinedustIndexLabel = UILabel().then {
-        $0.text = "00"
+        $0.text = "finedustIndexDefaultText".localized
         $0.adjustsFontSizeToFitWidth = true
         $0.font = UIFont.boldSystemFont(ofSize: 24)
         $0.textColor = .black
     }
     let dateTimeLabel = UILabel().then {
-        $0.text = "2020-01-01 23:00"
+        $0.text = ""
         $0.adjustsFontSizeToFitWidth = true
         $0.font = UIFont.systemFont(ofSize: 18)
         $0.textColor = .darkGray

@@ -4,7 +4,7 @@ import Alamofire
 import SwiftyJSON
 
 class FinedustInfo {
-    let serviceKey : String = "Rj3kKMVbru0VayKTDlnSUCjbsuko3ZKRyXCKckQ%2Fe2lGHsThH3i6W07DfKPezNmNuAzD%2FpZBhOOTIGbIs3gOXg%3D%3D"
+    static let apiKey : String = "Rj3kKMVbru0VayKTDlnSUCjbsuko3ZKRyXCKckQ%2Fe2lGHsThH3i6W07DfKPezNmNuAzD%2FpZBhOOTIGbIs3gOXg%3D%3D"
     var cityName : String = ""
     var finedustValue : Int = 0
     var finedustGrade : Int
@@ -63,7 +63,7 @@ class FinedustInfo {
     
     static func sendRequest(userLocation : String, cityName : String, serviceKey : String, completion:@escaping (FinedustInfo) -> Void) {
         // 하드코딩된 부분 PushServiceManager로 이동
-        private let queryUrl = "http://openapi.airkorea.or.kr/openapi/services/rest/ArpltnInforInqireSvc/getCtprvnMesureSidoLIst?sidoName=\(userLocation)&searchCondition=DAILY&pageNo=1&numOfRows=20&ServiceKey=\(serviceKey)&ver=1.3(&_returnType=json"
+        let queryUrl = "http://openapi.airkorea.or.kr/openapi/services/rest/ArpltnInforInqireSvc/getCtprvnMesureSidoLIst?sidoName=\(userLocation)&searchCondition=DAILY&pageNo=1&numOfRows=20&ServiceKey=\(serviceKey)&ver=1.3(&_returnType=json"
         AF.request(queryUrl).validate(statusCode: 200..<300).responseJSON(completionHandler: { response in
             switch(response.result) {
             case .success(_) :
