@@ -7,17 +7,21 @@ class MainViewController: UIViewController {
         super.viewDidLoad()
         setupUI()
         makeConstraints()
-        animbackgroundImage()
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        self.additionalSafeAreaInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(true)
+        animbackgroundImage()
     }
 
     func animbackgroundImage() {
-        UIView.animate(withDuration: 20, delay: 1, options: [.repeat, .autoreverse], animations: {
-            self.backgroundImageView.center.x = -100
-        })
+        DispatchQueue.main.async {
+            UIView.animate(withDuration: 20, delay: 1, options: [.repeat, .autoreverse], animations: {
+                self.backgroundImageView.center.x = 100
+            })
+            self.view.layoutIfNeeded()
+
+        }
     }
     
     func setupUI() {

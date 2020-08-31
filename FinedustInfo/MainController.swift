@@ -104,7 +104,11 @@ class MainController: MainViewController , CLLocationManagerDelegate{
             let finedustGrade = indecatorImageSelector.getFinedustGradeName
             let time = String(nowFinedust.dateTime)
             let url = URL(string: indecatorImageSelector.getImageUrl)
-            if userLanguage != "ko" { self.LocationNameLabel.text = city }
+            if userLanguage != "ko" {
+                DispatchQueue.main.async {
+                    self.LocationNameLabel.text = city
+                }
+            }
             self.setupUI(fGrade: finedustGrade, fIndex: finedustIndex, ufGrade: ultraFinedustGrade, ufindex: ultraFinedustIndex, time: time, imgUrl: url!)
             // DispatchQueue.main.async
         }) // FineduestInfo.sendRequst
