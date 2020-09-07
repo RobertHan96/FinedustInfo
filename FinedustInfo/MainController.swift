@@ -30,6 +30,21 @@ class MainController: MainViewController , CLLocationManagerDelegate{
                 self.getFinedustInfo()
             }
         }
+        
+
+    }
+
+    func getIndicatorImageUrl(finedustGrade : Int, completion:@escaping (Any) -> Void){
+        let queryUrl = "http://0.0.0.0:8000/\(finedustGrade)"
+        AF.request(queryUrl).validate(statusCode: 200..<300).responseJSON(completionHandler: { response in
+            switch(response.result) {
+            case .success(let value) :
+                completion(response.value)
+            case .failure(_) :
+                print("[Log] data request is failed, \(response.result)")
+                break;
+            }
+        })
     }
         
     @objc func refreshFinedustInfo(_ sender : UIButton!) {
@@ -95,6 +110,7 @@ class MainController: MainViewController , CLLocationManagerDelegate{
     func getFinedustInfo() {
         let key = FinedustInfo.apiKey
         FinedustInfo.sendRequest(userLocation: self.encodedUserProvince, cityName: self.unEncodedUserCity, serviceKey: key , completion: { (nowFinedust) in
+            var url : URL?
             let userLanguage = Locale.current.languageCode
             let finedustIndex = String(nowFinedust.finedustValue)
             let indecatorImageSelector = IndecatorImgeSelector(finedustGrade: nowFinedust.finedustGrade, ultraFinedustGrade: nowFinedust.ultraFineDustGrade)
@@ -103,15 +119,28 @@ class MainController: MainViewController , CLLocationManagerDelegate{
             let ultraFinedustGrade = indecatorImageSelector.getFinedustGradeName
             let finedustGrade = indecatorImageSelector.getFinedustGradeName
             let time = String(nowFinedust.dateTime)
-            let url = URL(string: indecatorImageSelector.getImageUrl)
+            let tempURL = URL(string: indecatorImageSelector.getImageUrl)
+
             if userLanguage != "ko" {
                 DispatchQueue.main.async {
                     self.LocationNameLabel.text = city
                 }
             }
-            self.setupUI(fGrade: finedustGrade, fIndex: finedustIndex, ufGrade: ultraFinedustGrade, ufindex: ultraFinedustIndex, time: time, imgUrl: url!)
+            
+            self.getIndicatorImageUrl(finedustGrade: nowFinedust.finedustGrade) { (imgURL) in
+                debugPrint(imgURL)
+                let json = JSON(imgURL)
+                let resultString = json["url"].stringValue
+                let resultURL = URL(string: resultString)
+                url = resultURL
+                self.setupUI(fGrade: finedustGrade, fIndex: finedustIndex, ufGrade: ultraFinedustGrade, ufindex: ultraFinedustIndex, time: time, imgUrl: url ?? tempURL!)
+            }
+
+            
+
             // DispatchQueue.main.async
         }) // FineduestInfo.sendRequst
+        print("[Log 1234]")
     } // getInfo Function
     
     func setupUI(fGrade : String, fIndex : String, ufGrade : String,
@@ -134,6 +163,16 @@ class MainController: MainViewController , CLLocationManagerDelegate{
         self.view.layoutIfNeeded()
         print("[Log] UI셋팅 완료")
     } // setupUI
+    
+    func setIndicatorImageWithURL(img : UIImageView, url : URL) {
+        DispatchQueue.main.async {
+            let imageSize =  img.bounds.size
+            let processor = DownsamplingImageProcessor(size: imageSize)
+                |> RoundCornerImageProcessor(cornerRadius: 100)
+            img.kf.indicatorType = .activity
+            img.kf.setImage(with: url, options: [ .processor(processor)])
+        }
+    }
 
     func setBackgroundImagebyFinedustGrade(grade : String) {
         switch grade {

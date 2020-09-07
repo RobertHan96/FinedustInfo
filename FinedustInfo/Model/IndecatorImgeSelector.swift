@@ -1,8 +1,10 @@
 import Foundation
+import Alamofire
 
 struct IndecatorImgeSelector {
     var finedustGrade : Int = 0
     var ultraFinedustGrade : Int = 0
+    var imageUrl : URL?
 
     var getImageUrl : String {
         var result = ""

@@ -10,8 +10,7 @@ class FinedustInfo {
     var finedustGrade : Int
     var ultraFineDuestValue : Int
     var ultraFineDustGrade : Int
-    var dateTime : String
-    
+    var dateTime : String    
     init(cityName : String, pm10Value : Int, pm10Grade : Int, pm25Value : Int, pm25Grade : Int, dateTime : String) {
         self.cityName = cityName
         self.finedustValue = pm10Value
@@ -79,4 +78,5 @@ class FinedustInfo {
         )
 
     }
+    
 }
