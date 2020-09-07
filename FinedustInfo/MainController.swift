@@ -1,11 +1,11 @@
 import UIKit
 import CoreLocation
 import SwiftyJSON
-import Alamofire
 import Kingfisher
 
 class MainController: MainViewController , CLLocationManagerDelegate{
     var locationManager : CLLocationManager!
+    let imageSelector = IndecatorImgeSelector()
     var encodedUserProvince = ""
     var encodedUserCity = ""
     var unEncodedUserCity = ""
@@ -32,19 +32,6 @@ class MainController: MainViewController , CLLocationManagerDelegate{
         }
         
 
-    }
-
-    func getIndicatorImageUrl(finedustGrade : Int, completion:@escaping (Any) -> Void){
-        let queryUrl = "http://0.0.0.0:8000/\(finedustGrade)"
-        AF.request(queryUrl).validate(statusCode: 200..<300).responseJSON(completionHandler: { response in
-            switch(response.result) {
-            case .success(let value) :
-                completion(response.value)
-            case .failure(_) :
-                print("[Log] data request is failed, \(response.result)")
-                break;
-            }
-        })
     }
         
     @objc func refreshFinedustInfo(_ sender : UIButton!) {
@@ -126,8 +113,8 @@ class MainController: MainViewController , CLLocationManagerDelegate{
                     self.LocationNameLabel.text = city
                 }
             }
-            
-            self.getIndicatorImageUrl(finedustGrade: nowFinedust.finedustGrade) { (imgURL) in
+            // 모델에서 json 처리하도록 개선 필요
+            self.imageSelector.getIndicatorImageUrl(finedustGrade: nowFinedust.finedustGrade) { (imgURL) in
                 debugPrint(imgURL)
                 let json = JSON(imgURL)
                 let resultString = json["url"].stringValue
@@ -135,9 +122,6 @@ class MainController: MainViewController , CLLocationManagerDelegate{
                 url = resultURL
                 self.setupUI(fGrade: finedustGrade, fIndex: finedustIndex, ufGrade: ultraFinedustGrade, ufindex: ultraFinedustIndex, time: time, imgUrl: url ?? tempURL!)
             }
-
-            
-
             // DispatchQueue.main.async
         }) // FineduestInfo.sendRequst
         print("[Log 1234]")
@@ -146,7 +130,8 @@ class MainController: MainViewController , CLLocationManagerDelegate{
     func setupUI(fGrade : String, fIndex : String, ufGrade : String,
                  ufindex: String, time : String, imgUrl : URL) {
         self.activityIndicator.startAnimating()
-        setBackgroundImagebyFinedustGrade(grade: fGrade)
+        imageSelector.setBackgroundImagebyFinedustGrade(grade: fGrade, currentView: self)
+        // 이미지 적용 부분 함수 모듈화 필요
         let imageSize =  self.indicatorFaceImageView.bounds.size
         let processor = DownsamplingImageProcessor(size: imageSize)
             |> RoundCornerImageProcessor(cornerRadius: 100)
@@ -163,28 +148,4 @@ class MainController: MainViewController , CLLocationManagerDelegate{
         self.view.layoutIfNeeded()
         print("[Log] UI셋팅 완료")
     } // setupUI
-    
-    func setIndicatorImageWithURL(img : UIImageView, url : URL) {
-        DispatchQueue.main.async {
-            let imageSize =  img.bounds.size
-            let processor = DownsamplingImageProcessor(size: imageSize)
-                |> RoundCornerImageProcessor(cornerRadius: 100)
-            img.kf.indicatorType = .activity
-            img.kf.setImage(with: url, options: [ .processor(processor)])
-        }
-    }
-
-    func setBackgroundImagebyFinedustGrade(grade : String) {
-        switch grade {
-            case grade.finedustGradeBad :
-                    self.backgroundImageView.image = UIImage(named: grade.finedustGradeBad)
-                    self.view.bringSubviewToFront(LocationNameLabel)
-            case grade.finedustGradeModerate :
-                    self.backgroundImageView.image = UIImage(named: grade.finedustGradeModerate)
-                    self.view.bringSubviewToFront(LocationNameLabel)
-            default:
-                self.backgroundImageView.image = UIImage(named: grade.finedustGradeGood)
-                self.view.bringSubviewToFront(LocationNameLabel)
-        }
-    }
 }
