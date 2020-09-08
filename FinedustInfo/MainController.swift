@@ -100,7 +100,7 @@ class MainController: MainViewController , CLLocationManagerDelegate{
             let indecatorImageSelector = IndecatorImgeSelector(finedustGrade: nowFinedust.finedustGrade, ultraFinedustGrade: nowFinedust.ultraFineDustGrade)
             let city = nowFinedust.cityName
             let ultraFinedustIndex = String(nowFinedust.ultraFineDuestValue)
-            let ultraFinedustGrade = indecatorImageSelector.getFinedustGradeName
+            let ultraFinedustGrade = indecatorImageSelector.getUFdustGradeName
             let finedustGrade = indecatorImageSelector.getFinedustGradeName
             let time = String(nowFinedust.dateTime)
             if userLanguage != "ko" {
