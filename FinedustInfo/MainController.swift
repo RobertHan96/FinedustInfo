@@ -113,31 +113,18 @@ class MainController: MainViewController , CLLocationManagerDelegate{
                     self.LocationNameLabel.text = city
                 }
             }
-            // 모델에서 json 처리하도록 개선 필요
             self.imageSelector.getIndicatorImageUrl(finedustGrade: nowFinedust.finedustGrade) { (imgURL) in
                 debugPrint(imgURL)
-                let json = JSON(imgURL)
-                let resultString = json["url"].stringValue
-                let resultURL = URL(string: resultString)
-                url = resultURL
-                self.setupUI(fGrade: finedustGrade, fIndex: finedustIndex, ufGrade: ultraFinedustGrade, ufindex: ultraFinedustIndex, time: time, imgUrl: url ?? tempURL!)
+                self.setupUI(fGrade: finedustGrade, fIndex: finedustIndex, ufGrade: ultraFinedustGrade, ufindex: ultraFinedustIndex, time: time, imgUrl: imgURL)
             }
-            // DispatchQueue.main.async
         }) // FineduestInfo.sendRequst
-        print("[Log 1234]")
-    } // getInfo Function
+    } // getFinedustInfo Function
     
     func setupUI(fGrade : String, fIndex : String, ufGrade : String,
                  ufindex: String, time : String, imgUrl : URL) {
         self.activityIndicator.startAnimating()
         imageSelector.setBackgroundImagebyFinedustGrade(grade: fGrade, currentView: self)
-        // 이미지 적용 부분 함수 모듈화 필요
-        let imageSize =  self.indicatorFaceImageView.bounds.size
-        let processor = DownsamplingImageProcessor(size: imageSize)
-            |> RoundCornerImageProcessor(cornerRadius: 100)
-        self.indicatorFaceImageView.kf.indicatorType = .activity
-        self.indicatorFaceImageView.kf.setImage(with: imgUrl, options:
-            [ .processor(processor) ])
+        makeCircleImage(url: imgUrl)
         self.indicatorLabel.text = fGrade
         self.finedustIndexLabel.text = fIndex
         self.finedustGradeLabel.text = fGrade
@@ -148,4 +135,13 @@ class MainController: MainViewController , CLLocationManagerDelegate{
         self.view.layoutIfNeeded()
         print("[Log] UI셋팅 완료")
     } // setupUI
+    
+    func makeCircleImage(url : URL) {
+        let imageSize =  self.indicatorFaceImageView.bounds.size
+        let processor = DownsamplingImageProcessor(size: imageSize)
+            |> RoundCornerImageProcessor(cornerRadius: 100)
+        self.indicatorFaceImageView.kf.indicatorType = .activity
+        self.indicatorFaceImageView.kf.setImage(with: url, options:
+            [ .processor(processor) ])
+    }
 }

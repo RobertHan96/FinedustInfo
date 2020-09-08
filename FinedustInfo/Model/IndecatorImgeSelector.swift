@@ -8,12 +8,15 @@ struct IndecatorImgeSelector {
     var ultraFinedustGrade : Int = 0
     var imageUrl : URL?
 
-    func getIndicatorImageUrl(finedustGrade : Int, completion:@escaping (Any) -> Void){
+    func getIndicatorImageUrl(finedustGrade : Int, completion:@escaping (URL) -> Void){
         let queryUrl = "http://0.0.0.0:8000/\(finedustGrade)"
         AF.request(queryUrl).validate(statusCode: 200..<300).responseJSON(completionHandler: { response in
             switch(response.result) {
             case .success(let value) :
-                completion(response.value)
+                let json = JSON(value)
+                let responseURL = URL(string: json["url"].stringValue)
+                guard let url = responseURL else { return }
+                completion(url)
             case .failure(_) :
                 print("[Log] data request is failed, \(response.result)")
                 break;
