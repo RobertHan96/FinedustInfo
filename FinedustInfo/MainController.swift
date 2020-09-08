@@ -30,8 +30,6 @@ class MainController: MainViewController , CLLocationManagerDelegate{
                 self.getFinedustInfo()
             }
         }
-        
-
     }
         
     @objc func refreshFinedustInfo(_ sender : UIButton!) {
@@ -97,7 +95,6 @@ class MainController: MainViewController , CLLocationManagerDelegate{
     func getFinedustInfo() {
         let key = FinedustInfo.apiKey
         FinedustInfo.sendRequest(userLocation: self.encodedUserProvince, cityName: self.unEncodedUserCity, serviceKey: key , completion: { (nowFinedust) in
-            var url : URL?
             let userLanguage = Locale.current.languageCode
             let finedustIndex = String(nowFinedust.finedustValue)
             let indecatorImageSelector = IndecatorImgeSelector(finedustGrade: nowFinedust.finedustGrade, ultraFinedustGrade: nowFinedust.ultraFineDustGrade)
@@ -106,8 +103,6 @@ class MainController: MainViewController , CLLocationManagerDelegate{
             let ultraFinedustGrade = indecatorImageSelector.getFinedustGradeName
             let finedustGrade = indecatorImageSelector.getFinedustGradeName
             let time = String(nowFinedust.dateTime)
-            let tempURL = URL(string: indecatorImageSelector.getImageUrl)
-
             if userLanguage != "ko" {
                 DispatchQueue.main.async {
                     self.LocationNameLabel.text = city
@@ -123,7 +118,7 @@ class MainController: MainViewController , CLLocationManagerDelegate{
     func setupUI(fGrade : String, fIndex : String, ufGrade : String,
                  ufindex: String, time : String, imgUrl : URL) {
         self.activityIndicator.startAnimating()
-        imageSelector.setBackgroundImagebyFinedustGrade(grade: fGrade, currentView: self)
+        setBackgroundImagebyFinedustGrade(grade: fGrade, currentView: self)
         makeCircleImage(url: imgUrl)
         self.indicatorLabel.text = fGrade
         self.finedustIndexLabel.text = fIndex
@@ -135,6 +130,21 @@ class MainController: MainViewController , CLLocationManagerDelegate{
         self.view.layoutIfNeeded()
         print("[Log] UI셋팅 완료")
     } // setupUI
+    
+    func setBackgroundImagebyFinedustGrade(grade : String, currentView : MainViewController) {
+        let locationNameLable = currentView.LocationNameLabel
+        switch grade {
+            case grade.finedustGradeBad :
+                    currentView.backgroundImageView.image = UIImage(named: grade.finedustGradeBad)
+                    currentView.view.bringSubviewToFront(locationNameLable)
+            case grade.finedustGradeModerate :
+                    currentView.backgroundImageView.image = UIImage(named: grade.finedustGradeModerate)
+                    currentView.view.bringSubviewToFront(locationNameLable)
+            default:
+                currentView.backgroundImageView.image = UIImage(named: grade.finedustGradeGood)
+                currentView.view.bringSubviewToFront(locationNameLable)
+        }
+    }
     
     func makeCircleImage(url : URL) {
         let imageSize =  self.indicatorFaceImageView.bounds.size
