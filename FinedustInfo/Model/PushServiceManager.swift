@@ -4,7 +4,7 @@ import FirebaseInstanceID
 
 class PushServiceManager {
     static let DEVICE_TOKEN = UserDefaults.standard.string(forKey: "token")
-    static let pushServerUrl = "http://13.124.81.229:8000/sendToken/"
+    static let pushServerUrl = "http://112.149.126.160:3380/sendToken/"
 
     static func registerTokenToDB(userToken : String) {
         InstanceID.instanceID().instanceID { (result, error) in

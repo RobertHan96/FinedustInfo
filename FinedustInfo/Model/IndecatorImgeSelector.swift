@@ -51,7 +51,7 @@ struct IndecatorImgeSelector {
     }
         
     func getIndicatorImageUrl(finedustGrade : Int, completion:@escaping (URL) -> Void){
-        let queryUrl = "http://0.0.0.0:8000/\(finedustGrade)"
+        let queryUrl = "http://112.149.126.160:3370/\(finedustGrade)"
         let urlForError : URL = URL(string : "https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FkIqsC%2FbtqEGT92fDc%2FHdq9Qowhgxvbrn94igvzMK%2Fimg.png")!
         AF.request(queryUrl).validate(statusCode: 200..<300).responseJSON(completionHandler: { response in
             switch(response.result) {
