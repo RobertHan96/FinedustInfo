@@ -19,6 +19,7 @@
 		04ABEB62245816AF00D3392E /* MainController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04ABEB61245816AF00D3392E /* MainController.swift */; };
 		04ABEB7824667C8100D3392E /* FinedustInfoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04ABEB7724667C8100D3392E /* FinedustInfoTests.swift */; };
 		04C6E9AA24F80487006CC36C /* IndecatorImgeSelector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C6E9A924F80487006CC36C /* IndecatorImgeSelector.swift */; };
+		04D3EC1E255BBA2600B4443D /* WeatherAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D3EC1D255BBA2600B4443D /* WeatherAPI.swift */; };
 		04F6191724A2E8BB004F1A9B /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 04F6191624A2E8BB004F1A9B /* GoogleService-Info.plist */; };
 		747CABACABBE97843B823C77 /* Pods_FinedustInfo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A1185E377F017CF9A0A6FF04 /* Pods_FinedustInfo.framework */; };
 /* End PBXBuildFile section */
@@ -53,6 +54,7 @@
 		04ABEB7724667C8100D3392E /* FinedustInfoTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinedustInfoTests.swift; sourceTree = "<group>"; };
 		04ABEB7924667C8100D3392E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		04C6E9A924F80487006CC36C /* IndecatorImgeSelector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IndecatorImgeSelector.swift; sourceTree = "<group>"; };
+		04D3EC1D255BBA2600B4443D /* WeatherAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherAPI.swift; sourceTree = "<group>"; };
 		04F6191324A2E270004F1A9B /* FinedustInfo.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = FinedustInfo.entitlements; sourceTree = "<group>"; };
 		04F6191624A2E8BB004F1A9B /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		059FB8B56EF369AA5194F249 /* Pods-FinedustInfo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FinedustInfo.release.xcconfig"; path = "Target Support Files/Pods-FinedustInfo/Pods-FinedustInfo.release.xcconfig"; sourceTree = "<group>"; };
@@ -86,6 +88,7 @@
 				04ABEB5D2457B54F00D3392E /* FinedustInfo.swift */,
 				041AC7D3247FA82600B3227D /* Extensions.swift */,
 				042CCEB324AC69AF004AB537 /* PushServiceManager.swift */,
+				04D3EC1D255BBA2600B4443D /* WeatherAPI.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -307,6 +310,7 @@
 				04948CF424511D010076BE47 /* MainView.swift in Sources */,
 				04C6E9AA24F80487006CC36C /* IndecatorImgeSelector.swift in Sources */,
 				04948CF024511D010076BE47 /* AppDelegate.swift in Sources */,
+				04D3EC1E255BBA2600B4443D /* WeatherAPI.swift in Sources */,
 				04ABEB5E2457B55000D3392E /* FinedustInfo.swift in Sources */,
 				042CCEB424AC69AF004AB537 /* PushServiceManager.swift in Sources */,
 			);
@@ -484,7 +488,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = FinedustInfo/FinedustInfo.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 7;
+				CURRENT_PROJECT_VERSION = 8;
 				DEVELOPMENT_TEAM = KQS5CL5P74;
 				INFOPLIST_FILE = FinedustInfo/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
@@ -507,7 +511,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = FinedustInfo/FinedustInfo.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 7;
+				CURRENT_PROJECT_VERSION = 8;
 				DEVELOPMENT_TEAM = KQS5CL5P74;
 				INFOPLIST_FILE = FinedustInfo/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;

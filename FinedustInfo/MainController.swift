@@ -33,8 +33,12 @@ class MainController: MainViewController , CLLocationManagerDelegate{
     }
         
     @objc func refreshFinedustInfo(_ sender : UIButton!) {
-        fetchUserLocation()
-        getFinedustInfo()
+//        fetchUserLocation()
+//        getFinedustInfo()
+        WeatherApi().sendRequest { (weather) in
+            print("[Log] 날씨 정보 : \(weather.weatherName) - \(weather.temp) \n \(weather.imageUrl)")
+        }
+
     }
 
     func locationPermissionCheck() -> Bool {
