@@ -69,7 +69,7 @@ class MainViewController: UIViewController {
         }
         refreshBtn.snp.makeConstraints { (make) in
             make.right.equalTo(self.view.safeAreaLayoutGuide.snp.right).offset(-20)
-            make.centerY.equalTo(locationImageView).offset(0)
+            make.centerY.equalTo(locationImageView).offset(40)
             make.height.equalTo(20)
             make.width.equalTo(20)
         }

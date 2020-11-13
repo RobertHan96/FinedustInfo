@@ -35,9 +35,8 @@ class MainController: MainViewController , CLLocationManagerDelegate{
     @objc func refreshFinedustInfo(_ sender : UIButton!) {
 //        fetchUserLocation()
 //        getFinedustInfo()
-        WeatherApi().sendRequest { (weather) in
-            print("[Log] 날씨 정보 : \(weather.weatherName) - \(weather.temp) \n \(weather.imageUrl)")
-        }
+        let weatherVC = WeatherViewController()
+        self.navigationController?.pushViewController(weatherVC, animated: true)
 
     }
 
