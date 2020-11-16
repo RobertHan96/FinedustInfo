@@ -14,10 +14,10 @@ import SwiftyJSON
 
 struct Weather {
     var weatherName = ""
-    var temp : Float = 1
-    var minTemp :Float = 1
-    var maxTemp :Float = 1
-    var humidity :Float = 1
+    var temp : Int = 1
+    var minTemp :Int = 1
+    var maxTemp :Int = 1
+    var humidity :Int = 1
     var imageUrl = "http://openweathermap.org/img/wn/50n@2x.png"
 }
 
@@ -56,10 +56,10 @@ struct WeatherApi {
         let tempArrary = weatherData["main"].dictionaryValue
         let weatherName = weatherArrary.map{$0["main"].stringValue}.last!
         let weatherIconName = weatherArrary.map{$0["icon"].stringValue}.last ?? defaultImageIconName
-        let temp = tempArrary.map{$0.value.floatValue}.last!.getCelciusFromTempJson
-        let minTemp = tempArrary.map{$0.value.floatValue}.last!.getCelciusFromTempJson
-        let maxTemp = tempArrary.map{$0.value.floatValue}.last!.getCelciusFromTempJson
-        let humidity = tempArrary.map{$0.value.floatValue}.last!
+        let temp = Int(tempArrary.map{$0.value.floatValue}.last!.getCelciusFromTempJson)
+        let minTemp = Int(tempArrary.map{$0.value.floatValue}.last!.getCelciusFromTempJson)
+        let maxTemp = Int(tempArrary.map{$0.value.floatValue}.last!.getCelciusFromTempJson)
+        let humidity = Int(tempArrary.map{$0.value.floatValue}.last!)
         return Weather(weatherName: weatherName, temp: temp, minTemp: minTemp, maxTemp: maxTemp, humidity: humidity, imageUrl: iconBaseUrl + weatherIconName + iconImageFormat)
     }
  

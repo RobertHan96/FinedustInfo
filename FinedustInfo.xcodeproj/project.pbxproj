@@ -22,6 +22,7 @@
 		04D3EC1E255BBA2600B4443D /* WeatherAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D3EC1D255BBA2600B4443D /* WeatherAPI.swift */; };
 		04D3EC22255E02B400B4443D /* WeatherViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D3EC21255E02B400B4443D /* WeatherViewController.swift */; };
 		04D3EC24255E037A00B4443D /* WeatherView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D3EC23255E037A00B4443D /* WeatherView.swift */; };
+		04D3EC2625625BE800B4443D /* MainPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D3EC2525625BE700B4443D /* MainPageViewController.swift */; };
 		04F6191724A2E8BB004F1A9B /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 04F6191624A2E8BB004F1A9B /* GoogleService-Info.plist */; };
 		747CABACABBE97843B823C77 /* Pods_FinedustInfo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A1185E377F017CF9A0A6FF04 /* Pods_FinedustInfo.framework */; };
 /* End PBXBuildFile section */
@@ -59,6 +60,7 @@
 		04D3EC1D255BBA2600B4443D /* WeatherAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherAPI.swift; sourceTree = "<group>"; };
 		04D3EC21255E02B400B4443D /* WeatherViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherViewController.swift; sourceTree = "<group>"; };
 		04D3EC23255E037A00B4443D /* WeatherView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherView.swift; sourceTree = "<group>"; };
+		04D3EC2525625BE700B4443D /* MainPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPageViewController.swift; sourceTree = "<group>"; };
 		04F6191324A2E270004F1A9B /* FinedustInfo.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = FinedustInfo.entitlements; sourceTree = "<group>"; };
 		04F6191624A2E8BB004F1A9B /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		059FB8B56EF369AA5194F249 /* Pods-FinedustInfo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FinedustInfo.release.xcconfig"; path = "Target Support Files/Pods-FinedustInfo/Pods-FinedustInfo.release.xcconfig"; sourceTree = "<group>"; };
@@ -158,6 +160,7 @@
 			children = (
 				04ABEB61245816AF00D3392E /* MainViewController.swift */,
 				04D3EC21255E02B400B4443D /* WeatherViewController.swift */,
+				04D3EC2525625BE700B4443D /* MainPageViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -335,6 +338,7 @@
 				04D3EC24255E037A00B4443D /* WeatherView.swift in Sources */,
 				04948CF024511D010076BE47 /* AppDelegate.swift in Sources */,
 				04D3EC1E255BBA2600B4443D /* WeatherAPI.swift in Sources */,
+				04D3EC2625625BE800B4443D /* MainPageViewController.swift in Sources */,
 				04ABEB5E2457B55000D3392E /* FinedustInfo.swift in Sources */,
 				042CCEB424AC69AF004AB537 /* PushServiceManager.swift in Sources */,
 			);
