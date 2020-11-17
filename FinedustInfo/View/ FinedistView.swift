@@ -2,18 +2,7 @@ import UIKit
 import SnapKit
 import Then
 
-class MainViewController: UIViewController {
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        setupUI()
-        makeConstraints()
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(true)
-        animbackgroundImage()
-    }
-
+extension FinedustViewController {
     func animbackgroundImage() {
         DispatchQueue.main.async {
             UIView.animate(withDuration: 20, delay: 1, options: [.repeat, .autoreverse], animations: {
@@ -120,89 +109,4 @@ class MainViewController: UIViewController {
             make.right.equalTo(self.containerView.snp.right).offset(-20)
         }
     }
-            
-    lazy var activityIndicator: UIActivityIndicatorView = {
-            let activityIndicator = UIActivityIndicatorView()
-            activityIndicator.frame = CGRect(x: 0, y: 0, width: 50, height: 50)
-            activityIndicator.center = self.view.center
-            activityIndicator.color = UIColor.red
-            activityIndicator.hidesWhenStopped = true
-            activityIndicator.style = UIActivityIndicatorView.Style.white
-            activityIndicator.stopAnimating()
-            return activityIndicator }()
-    
-    let backgroundImageView = UIImageView().then {_ in}
-    let containerView = UIImageView().then {_ in }
-    let detailInfoView = UIView().then {
-        $0.layer.borderWidth = 1
-        $0.layer.borderColor = UIColor.black.cgColor
-        $0.layer.cornerRadius = 10
-    }
-    let locationImageView = UIImageView().then {
-        let locationIcon = UIImage(named: "locationIndicatorImageName".localized)
-        $0.image = locationIcon
-    }
-    let LocationNameLabel = UILabel().then {
-        $0.text = ""
-        $0.adjustsFontSizeToFitWidth = true
-        $0.font = UIFont.systemFont(ofSize: 18)
-        $0.textColor = .black
-    }
-    let refreshBtn = UIButton().then {
-        let image = UIImage(named: "refreschBtnImageName".localized)
-        $0.setImage(image, for: .normal)
-    }
-    let indicatorFaceImageView = UIImageView().then {
-        let face = UIImage(named: "loadFailErrorImageName".localized)
-        $0.image = face
-    }
-    let indicatorLabel = UILabel().then {
-        $0.text = "finedustGradeDefaultText".localized
-        $0.adjustsFontSizeToFitWidth = true
-        $0.font = UIFont.systemFont(ofSize: 35)
-        $0.textColor = .black
-    }
-    let finedustNameLabel = UILabel().then {
-        $0.text = "finedust".localized
-        $0.adjustsFontSizeToFitWidth = true
-        $0.font = UIFont.systemFont(ofSize: 24)
-        $0.textColor = .black
-    }
-    let ultraFinedustNameLabel = UILabel().then {
-        $0.text = "ultraFinedust".localized
-        $0.adjustsFontSizeToFitWidth = true
-        $0.font = UIFont.systemFont(ofSize: 24)
-        $0.textColor = .black
-    }
-    let finedustGradeLabel = UILabel().then {
-        $0.text = ""
-        $0.adjustsFontSizeToFitWidth = true
-        $0.font = UIFont.boldSystemFont(ofSize: 24)
-        $0.textColor = .black
-    }
-    let ultraFinedustGradeLabel = UILabel().then {
-        $0.text = ""
-        $0.adjustsFontSizeToFitWidth = true
-        $0.font = UIFont.boldSystemFont(ofSize: 24)
-        $0.textColor = .black
-    }
-    let finedustIndexLabel = UILabel().then {
-        $0.text = "finedustIndexDefaultText".localized
-        $0.adjustsFontSizeToFitWidth = true
-        $0.font = UIFont.boldSystemFont(ofSize: 24)
-        $0.textColor = .black
-    }
-    let ultraFinedustIndexLabel = UILabel().then {
-        $0.text = "finedustIndexDefaultText".localized
-        $0.adjustsFontSizeToFitWidth = true
-        $0.font = UIFont.boldSystemFont(ofSize: 24)
-        $0.textColor = .black
-    }
-    let dateTimeLabel = UILabel().then {
-        $0.text = ""
-        $0.adjustsFontSizeToFitWidth = true
-        $0.font = UIFont.systemFont(ofSize: 18)
-        $0.textColor = .darkGray
-    }
-
 }

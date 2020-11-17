@@ -10,8 +10,7 @@ extension WeatherViewController {
         view.addSubview(cityNameLabel)
         view.addSubview(weatherNameLabel)
         view.addSubview(tempLabelContainerView)
-        view.addSubview(minTempValueLabel)
-        view.addSubview(maxTempValueLabel)
+        view.addSubview(tempLabel)
     }
     
     func makeConstraints() {
@@ -41,22 +40,19 @@ extension WeatherViewController {
         weatherNameLabel.snp.makeConstraints { (make) in
             make.top.equalTo(self.cityNameLabel.snp.bottom).offset(8)
             make.left.equalTo(self.containerView.snp.left).offset(0)
-            make.right.greaterThanOrEqualTo(self.containerView.snp.right).offset(-20)
+            make.right.greaterThanOrEqualTo(self.tempLabel.snp.left).offset(-20)
+        }
+        tempLabel.snp.makeConstraints { (make) in
+            make.centerY.equalTo(self.weatherNameLabel)
+            make.right.lessThanOrEqualTo(self.containerView.snp.right).offset(-20)
         }
         tempLabelContainerView.snp.makeConstraints { (make) in
-            make.top.equalTo(weatherNameLabel.snp.bottom).offset(4)
+            make.top.equalTo(weatherNameLabel.snp.bottom).offset(14)
             make.left.equalTo(self.containerView.snp.left).offset(0)
             make.right.equalTo(self.containerView.snp.right).offset(0)
-            make.height.equalTo(10)
-        }
-        minTempValueLabel.snp.makeConstraints { (make) in
-            make.top.equalTo(tempLabelContainerView.snp.top).offset(4)
-            make.left.equalTo(self.tempLabelContainerView.snp.left).offset(0)
-        }
-        maxTempValueLabel.snp.makeConstraints { (make) in
-            make.top.equalTo(tempLabelContainerView.snp.top).offset(4)
-            make.left.equalTo(self.minTempValueLabel.snp.right).offset(10)
+            make.height.greaterThanOrEqualTo(100)
         }
     }
+    
     
 }

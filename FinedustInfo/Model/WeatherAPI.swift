@@ -22,7 +22,7 @@ struct Weather {
 }
 
 extension Float {
-    var getCelciusFromTempJson: Float {return (self - 273)}
+    var getDegreeFromKelvin: Float {return (self - 273)}
 }
 
 struct WeatherApi {
@@ -52,14 +52,12 @@ struct WeatherApi {
     func getWeatherFromJson(inputData : Data?) -> Weather {
         guard let jsonData = inputData else { return Weather() }
         guard let weatherData = try? JSON(data: jsonData) else { return Weather() }
-        let weatherArrary = weatherData["weather"].arrayValue
-        let tempArrary = weatherData["main"].dictionaryValue
-        let weatherName = weatherArrary.map{$0["main"].stringValue}.last!
-        let weatherIconName = weatherArrary.map{$0["icon"].stringValue}.last ?? defaultImageIconName
-        let temp = Int(tempArrary.map{$0.value.floatValue}.last!.getCelciusFromTempJson)
-        let minTemp = Int(tempArrary.map{$0.value.floatValue}.last!.getCelciusFromTempJson)
-        let maxTemp = Int(tempArrary.map{$0.value.floatValue}.last!.getCelciusFromTempJson)
-        let humidity = Int(tempArrary.map{$0.value.floatValue}.last!)
+        let weatherName = weatherData["weather"][0]["main"].stringValue
+        let weatherIconName = weatherData["weather"][0]["icon"].stringValue
+        let temp = Int(weatherData["main"]["temp"].floatValue.getDegreeFromKelvin)
+        let minTemp = Int(weatherData["main"]["temp_min"].floatValue.getDegreeFromKelvin)
+        let maxTemp = Int(weatherData["main"]["temp_max"].floatValue.getDegreeFromKelvin)
+        let humidity = weatherData["main"]["humidity"].intValue
         return Weather(weatherName: weatherName, temp: temp, minTemp: minTemp, maxTemp: maxTemp, humidity: humidity, imageUrl: iconBaseUrl + weatherIconName + iconImageFormat)
     }
  
