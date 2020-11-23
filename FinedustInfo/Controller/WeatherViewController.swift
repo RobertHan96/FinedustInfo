@@ -16,6 +16,12 @@ class WeatherViewController: UIViewController, CLLocationManagerDelegate {
         let weatherData = getWeatherData{ (weather) in
             self.setupUIFromWeatherData(weatherData: weather)
         }
+        let currentLocation = getEencodedUserProvince()
+        var finedustApi = FinedustAPI(location: currentLocation)
+        finedustApi.getRequestURL()
+        finedustApi.getFinedustData { (finedust) in
+            print(finedust.currentLoction, finedust.pm10Grade)
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -61,7 +67,7 @@ class WeatherViewController: UIViewController, CLLocationManagerDelegate {
         locationManager.startMonitoringSignificantLocationChanges()
         self.currentLocation = locationManager.location
         saveLocationToUserDefault(location: self.currentLocation)
-        print("Log 위치", currentLocation)
+        print("[Log] 현재 위치 : \(getEencodedUserProvince()) - \(getEncodedUserCity())")
     }
     
     private func saveLocationToUserDefault(location : CLLocation) {
@@ -82,6 +88,26 @@ class WeatherViewController: UIViewController, CLLocationManagerDelegate {
             }
         }
     }
+    
+    func getUnEncodedUserCity() -> String {
+        guard let city = UserDefaults.standard.object(forKey: "unEncodedUserCity") as? String else { return ""}
+        return city
+    }
+
+    func getEncodedUserCity() -> String {
+        guard let city = UserDefaults.standard.object(forKey: "encodedUserCity") as? String else { return ""}
+        return city
+    }
+  
+    func getEencodedUserProvince() -> String {
+        guard let city = UserDefaults.standard.object(forKey: "encodedUserProvince") as? String
+                        else { return ""}
+        let strIndex = city.index(city.startIndex, offsetBy: 2)
+        let location = city.substring(to: strIndex)
+
+        return location
+    }
+    
 
     private func getWeatherData(completion:@escaping (Weather) -> Void) -> Weather {
         var weatherData : Weather?

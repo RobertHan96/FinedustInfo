@@ -4,10 +4,13 @@ import Alamofire
 import SwiftyJSON
 
 
+extension Float {
+    var getDegreeFromKelvin: Float {return (self - 273)}
+}
 
 extension String {
     var makeStringKoreanEncoded : String {
-        return self.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!
+        return self.removingPercentEncoding ?? ""
     }
     
     func urlEncodingForString(string:String) -> String{
@@ -48,7 +51,7 @@ extension Int {
     
     var getIndicatorImageUrl : URL {
         let queryUrl = "http://112.149.126.160:3370/\(self)"
-        var defaultUrl = URL(string : "https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FkIqsC%2FbtqEGT92fDc%2FHdq9Qowhgxvbrn94igvzMK%2Fimg.png")!
+        var defaultUrl = URL(string: FinedustInfo.defaultUrl)!
         AF.request(queryUrl).validate(statusCode: 200..<300).responseJSON(completionHandler: { response in
             switch(response.result) {
             case .success(let value) :

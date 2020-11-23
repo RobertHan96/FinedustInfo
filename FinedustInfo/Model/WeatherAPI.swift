@@ -21,10 +21,6 @@ struct Weather {
     var imageUrl = "http://openweathermap.org/img/wn/50n@2x.png"
 }
 
-extension Float {
-    var getDegreeFromKelvin: Float {return (self - 273)}
-}
-
 struct WeatherApi {
     let baseUrl = "http://api.openweathermap.org/data/2.5/weather"
     let iconBaseUrl = "http://openweathermap.org/img/wn/"

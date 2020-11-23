@@ -30,9 +30,9 @@
             filePath = "FinedustInfo/Model/FinedustInfo.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "95"
-            endingLineNumber = "95"
-            landmarkName = "getFinedustInfoFromJson(inputData:cityName:)"
+            startingLineNumber = "159"
+            endingLineNumber = "159"
+            landmarkName = "getFinedustFromJson(inputData:cityName:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

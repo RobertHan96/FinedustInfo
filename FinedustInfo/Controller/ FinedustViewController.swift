@@ -32,6 +32,7 @@ class FinedustViewController: UIViewController{
     }
     
     func setupUI(componets : FinedustViewComponents) {
+        makeCircleImage(url: componets.imageUrl!)
         self.indicatorLabel.text = componets.pm10Grade
         self.finedustIndexLabel.text = String(componets.pm10Value)
         self.finedustGradeLabel.text = componets.pm10Grade
@@ -41,7 +42,7 @@ class FinedustViewController: UIViewController{
         self.LocationNameLabel.text = componets.currentLoction
         self.view.layoutIfNeeded()
         print("[Log] UI셋팅 완료")
-    } 
+    }
     
     func makeCircleImage(url : URL) {
         let imageSize =  self.indicatorFaceImageView.bounds.size
