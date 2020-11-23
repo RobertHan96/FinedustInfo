@@ -9,7 +9,6 @@ extension FinedustViewController {
                 self.backgroundImageView.center.x = 100
             })
             self.view.layoutIfNeeded()
-
         }
     }
     
@@ -28,7 +27,6 @@ extension FinedustViewController {
         view.addSubview(ultraFinedustGradeLabel)
         view.addSubview(finedustIndexLabel)
         view.addSubview(ultraFinedustIndexLabel)
-        view.addSubview(activityIndicator)
         view.addSubview(refreshBtn)
     }
 

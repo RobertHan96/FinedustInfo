@@ -25,7 +25,6 @@
 		04D3EC2625625BE800B4443D /* MainPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D3EC2525625BE700B4443D /* MainPageViewController.swift */; };
 		04D3EC282563528500B4443D /* TempInfoView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04D3EC272563528500B4443D /* TempInfoView.xib */; };
 		04D3EC2A256352C000B4443D /* TempInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D3EC29256352C000B4443D /* TempInfoView.swift */; };
-		04D3EC2C2563979F00B4443D /* TestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D3EC2B2563979D00B4443D /* TestViewController.swift */; };
 		04F6191724A2E8BB004F1A9B /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 04F6191624A2E8BB004F1A9B /* GoogleService-Info.plist */; };
 		747CABACABBE97843B823C77 /* Pods_FinedustInfo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A1185E377F017CF9A0A6FF04 /* Pods_FinedustInfo.framework */; };
 /* End PBXBuildFile section */
@@ -66,7 +65,6 @@
 		04D3EC2525625BE700B4443D /* MainPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPageViewController.swift; sourceTree = "<group>"; };
 		04D3EC272563528500B4443D /* TempInfoView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TempInfoView.xib; sourceTree = "<group>"; };
 		04D3EC29256352C000B4443D /* TempInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TempInfoView.swift; sourceTree = "<group>"; };
-		04D3EC2B2563979D00B4443D /* TestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestViewController.swift; sourceTree = "<group>"; };
 		04F6191324A2E270004F1A9B /* FinedustInfo.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = FinedustInfo.entitlements; sourceTree = "<group>"; };
 		04F6191624A2E8BB004F1A9B /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		059FB8B56EF369AA5194F249 /* Pods-FinedustInfo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FinedustInfo.release.xcconfig"; path = "Target Support Files/Pods-FinedustInfo/Pods-FinedustInfo.release.xcconfig"; sourceTree = "<group>"; };
@@ -168,7 +166,6 @@
 			children = (
 				04D3EC21255E02B400B4443D /* WeatherViewController.swift */,
 				04ABEB61245816AF00D3392E /*  FinedustViewController.swift */,
-				04D3EC2B2563979D00B4443D /* TestViewController.swift */,
 				04D3EC2525625BE700B4443D /* MainPageViewController.swift */,
 			);
 			path = Controller;
@@ -345,7 +342,6 @@
 				04ABEB62245816AF00D3392E /*  FinedustViewController.swift in Sources */,
 				04948CF424511D010076BE47 /*  FinedistView.swift in Sources */,
 				04C6E9AA24F80487006CC36C /* IndecatorImgeSelector.swift in Sources */,
-				04D3EC2C2563979F00B4443D /* TestViewController.swift in Sources */,
 				04D3EC24255E037A00B4443D /* WeatherView.swift in Sources */,
 				04D3EC2A256352C000B4443D /* TempInfoView.swift in Sources */,
 				04948CF024511D010076BE47 /* AppDelegate.swift in Sources */,

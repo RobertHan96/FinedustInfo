@@ -1,17 +1,15 @@
 import UIKit
-import CoreLocation
-import SwiftyJSON
 import Kingfisher
 
 class FinedustViewController: UIViewController{
     let imageSelector = IndecatorImgeSelector()
-    let encodedUserProvince = UserDefaults.standard.object(forKey: "encodedUserProvince") as! String
-    let encodedUserCity = UserDefaults.standard.object(forKey: "encodedUserCity") as! String
-    let unEncodedUserCity = UserDefaults.standard.object(forKey: "unEncodedUserCity") as! String
+    let encodedUserProvince = UserDefaults.standard.object(forKey: "encodedUserProvince") as? String
+    let encodedUserCity = UserDefaults.standard.object(forKey: "encodedUserCity") as? String
+    let unEncodedUserCity = UserDefaults.standard.object(forKey: "unEncodedUserCity") as? String
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .systemGray
+        view.backgroundColor = .white
         setupUI()
         makeConstraints()
         refreshBtn.addTarget(self, action: #selector(refreshFinedustInfo(_:)), for: .touchUpInside)
@@ -21,92 +19,39 @@ class FinedustViewController: UIViewController{
     }
         
     @objc func refreshFinedustInfo(_ sender : UIButton!) {
+        print("Log 미세먼지 정보 재요청...")
         getFinedustInfo()
-    }
-
-    func fetchLocationLabelIfKorean(location : String, label : UILabel) {
-        let userLanguage = Locale.current.languageCode
-        if userLanguage == "ko" {
-            DispatchQueue.main.async {
-                label.text = location
-            }
-        }
     }
     
     func getFinedustInfo() {
-        let key = FinedustInfo.apiKey
-        FinedustInfo.sendRequest(userLocation: encodedUserProvince, cityName: unEncodedUserCity, serviceKey: key , completion: { (nowFinedust) in
-            let userLanguage = Locale.current.languageCode
-            let finedustIndex = String(nowFinedust.finedustValue)
-            let indecatorImageSelector = IndecatorImgeSelector(finedustGrade: nowFinedust.finedustGrade, ultraFinedustGrade: nowFinedust.ultraFineDustGrade)
-            let city = nowFinedust.cityName
-            let ultraFinedustIndex = String(nowFinedust.ultraFineDuestValue)
-            let ultraFinedustGrade = indecatorImageSelector.getUFdustGradeName
-            let finedustGrade = indecatorImageSelector.getFinedustGradeName
-            let time = String(nowFinedust.dateTime)
-            if userLanguage != "ko" {
-                DispatchQueue.main.async {
-                    self.LocationNameLabel.text = city
-                }
-            }
-            self.imageSelector.getIndicatorImageUrl(finedustGrade: nowFinedust.finedustGrade) { (imgURL) in
-                debugPrint(imgURL)
-                self.setupUI(fGrade: finedustGrade, fIndex: finedustIndex, ufGrade: ultraFinedustGrade, ufindex: ultraFinedustIndex, time: time, imgUrl: imgURL)
-            }
-        }) // FineduestInfo.sendRequst
-    } // getFinedustInfo Function
-    
-    func setupUI(fGrade : String, fIndex : String, ufGrade : String,
-                 ufindex: String, time : String, imgUrl : URL) {
-        self.activityIndicator.startAnimating()
-//        setBackgroundImagebyFinedustGrade(grade: fGrade, currentView: self)
-        makeCircleImage(url: imgUrl)
-        self.indicatorLabel.text = fGrade
-        self.finedustIndexLabel.text = fIndex
-        self.finedustGradeLabel.text = fGrade
-        self.ultraFinedustIndexLabel.text = ufindex
-        self.ultraFinedustGradeLabel.text = ufGrade
-        self.dateTimeLabel.text = time
-        self.activityIndicator.stopAnimating()
-        self.view.layoutIfNeeded()
-        print("[Log] UI셋팅 완료")
-    } // setupUI
-    
-    func setBackgroundImagebyFinedustGrade(grade : String, currentView : FinedustViewController) {
-        let locationNameLable = currentView.LocationNameLabel
-        switch grade {
-            case grade.finedustGradeBad :
-                    currentView.backgroundImageView.image = UIImage(named: grade.finedustGradeBad)
-                    currentView.view.bringSubviewToFront(locationNameLable)
-            case grade.finedustGradeModerate :
-                    currentView.backgroundImageView.image = UIImage(named: grade.finedustGradeModerate)
-                    currentView.view.bringSubviewToFront(locationNameLable)
-            default:
-                currentView.backgroundImageView.image = UIImage(named: grade.finedustGradeGood)
-                currentView.view.bringSubviewToFront(locationNameLable)
+        let defaultProvince = "%EC%84%9C%EC%9A%B8"
+        let defaultCity = "%EA%B4%91%EC%A7%84%EA%B5%AC"
+        FinedustInfo.getFinedustData(sido: defaultProvince, city: defaultCity) { (data) in
+            self.setupUI(componets: data)
         }
     }
+    
+    func setupUI(componets : FinedustViewComponents) {
+        self.indicatorLabel.text = componets.pm10Grade
+        self.finedustIndexLabel.text = String(componets.pm10Value)
+        self.finedustGradeLabel.text = componets.pm10Grade
+        self.ultraFinedustIndexLabel.text = String(componets.pm25Value)
+        self.ultraFinedustGradeLabel.text = componets.pm25Grade
+        self.dateTimeLabel.text = componets.datetime
+        self.LocationNameLabel.text = componets.currentLoction
+        self.view.layoutIfNeeded()
+        print("[Log] UI셋팅 완료")
+    } 
     
     func makeCircleImage(url : URL) {
         let imageSize =  self.indicatorFaceImageView.bounds.size
         let processor = DownsamplingImageProcessor(size: imageSize)
-            |> RoundCornerImageProcessor(cornerRadius: 100)
+            |> RoundCornerImageProcessor(cornerRadius: 10)
         self.indicatorFaceImageView.kf.indicatorType = .activity
         self.indicatorFaceImageView.kf.setImage(with: url, options:
             [ .processor(processor) ])
     }
-    
-    lazy var activityIndicator: UIActivityIndicatorView = {
-            let activityIndicator = UIActivityIndicatorView()
-            activityIndicator.frame = CGRect(x: 0, y: 0, width: 50, height: 50)
-            activityIndicator.center = self.view.center
-            activityIndicator.color = UIColor.red
-            activityIndicator.hidesWhenStopped = true
-            activityIndicator.style = UIActivityIndicatorView.Style.white
-            activityIndicator.stopAnimating()
-            return activityIndicator }()
-    
-    let backgroundImageView = UIImageView().then {_ in}
+    let backgroundImageView = UIImageView().then { _ in }
     let containerView = UIImageView().then {_ in }
     let detailInfoView = UIView().then {
         $0.layer.borderWidth = 1

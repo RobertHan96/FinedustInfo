@@ -4,7 +4,11 @@ import Alamofire
 import SwiftyJSON
 
 class FinedustInfo {
-    static let apiKey : String = "Rj3kKMVbru0VayKTDlnSUCjbsuko3ZKRyXCKckQ%2Fe2lGHsThH3i6W07DfKPezNmNuAzD%2FpZBhOOTIGbIs3gOXg%3D%3D"
+    static let pp = ["sidoName" : "서울", "searchCondition" : "DAILY"]
+    static let baseUrl = "http://openapi.airkorea.or.kr/openapi/services/rest/ArpltnInforInqireSvc/getCtprvnMesureSidoLIst"
+    static let params = ["searchCondition", "ServiceKey", "_returnType"]
+    static let apiKey : String = "ZiSNIwgl%2BWu%2FVFxTGPUa%2FCHGRtQTKy4RRj88RPZbBXz0hhxW2c9L7nBijrKzinyX4dHrc%2FBhHjh6EH0nqAsJaw%3D%3D"
+    static let paramsValue = ["DAILY", apiKey, "json"]
     var cityName : String = ""
     var finedustValue : Int = 0
     var finedustGrade : Int
@@ -19,8 +23,57 @@ class FinedustInfo {
         self.ultraFineDustGrade = pm25Grade
         self.dateTime = dateTime
     }
+    
+    static func getFinedustData(sido : String, city : String, completion:@escaping (FinedustViewComponents) -> Void) {
+        let requestUrl = getRequestUrl(cityName: "서울")
+        let test = getURL(url: baseUrl, params: pp)
+        AF.request(test, method : .get)
+            .validate(statusCode: 200..<300)
+            .responseJSON(completionHandler: { response in
+            switch(response.result) {
+            case .success(_) :
+                if let data = response.value {
+                    let responseString = NSString(data: response.data!, encoding: String.Encoding.utf8.rawValue )
+                    print("[Log] \(responseString)")
+                }
+                let data = FinedustInfo.getFinedustInfoFromJson(inputData: response.data!, cityName: "광진구")
+                completion(data)
+                break ;
+            case .failure(_) :
+                print("[Log] data request is failed", response.request ,(response.result))
+                break;
+            }
+        })
+    }
+    
+    static func getURL(url:String, params:[String: Any]) -> URL {
+        let urlParams = params.flatMap({ (key, value) -> String in
+        return "\(key)=\(value)"
+        }).joined(separator: "&")
+        let withURL = url + "?\(urlParams)"
+        let encoded = withURL.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)! + "&serviceKey=" + apiKey + "&_returnType=json"
+        return URL(string:encoded)!
+    }
+    
+    static func getRequestUrl(cityName : String) -> String {
+        let url = NSURLComponents(string: baseUrl)
+        var items = [URLQueryItem]()
+        items.append(URLQueryItem(name: "sidoName", value: cityName))
+        for i in 0...2 {
+            print(params[i], paramsValue[i])
+            items.append(URLQueryItem(name: params[i], value: paramsValue[i]))
+        }
         
-    static func getFinedustInfoFromJson(inputData : Data, cityName : String) -> FinedustInfo {
+        items = items.filter{!$0.name.isEmpty}
+        if !items.isEmpty {
+            url?.queryItems = items
+        }
+        guard let requestUrl = url?.string! else { return ""}
+        
+        return requestUrl
+    }
+
+    static func getFinedustInfoFromJson(inputData : Data, cityName : String) -> FinedustViewComponents {
         if let json = try? JSON(data: inputData) {
             let list = json["list"].arrayValue
             let citis = list.filter{ city -> Bool in
@@ -35,10 +88,12 @@ class FinedustInfo {
         let pm10Grade = pm10Value.checkFinedustGrade(data: pm10Value)
         let pm25Grade = pm25Value.checkFinedustGrade(data: pm25Value)
         let datatime = myCity.map{$0["dataTime"].stringValue}.last ?? ""
-        let parsedData = FinedustInfo(cityName: cityName, pm10Value: pm10Value, pm10Grade: pm10Grade, pm25Value: pm25Value, pm25Grade: pm25Grade, dateTime: datatime)
+            let parsedData = FinedustViewComponents(currentLoction: cityName, pm10Grade: pm10Grade.finedustGradeName ,
+                                                    pm10Value: pm10Value, pm25Grade: pm25Grade.finedustGradeName,
+                                                    pm25Value: pm25Value, datetime: datatime)
             return parsedData
         } else {
-            return FinedustInfo(cityName: "", pm10Value: 1, pm10Grade: 1, pm25Value: 1, pm25Grade: 1, dateTime: "")
+            return FinedustViewComponents(currentLoction: cityName, pm10Grade: "-", pm10Value: 1, pm25Grade: "-", pm25Value: 1, datetime: "")
         }
     }
     
@@ -59,24 +114,15 @@ class FinedustInfo {
          }
     }
     
-    static func sendRequest(userLocation : String, cityName : String, serviceKey : String, completion:@escaping (FinedustInfo) -> Void) {
-        let queryUrl = "http://openapi.airkorea.or.kr/openapi/services/rest/ArpltnInforInqireSvc/getCtprvnMesureSidoLIst?sidoName=\(userLocation)&searchCondition=DAILY&pageNo=1&numOfRows=20&ServiceKey=\(serviceKey)&ver=1.3(&_returnType=json"
-        AF.request(queryUrl).validate(statusCode: 200..<300).responseJSON(completionHandler: { response in
-            switch(response.result) {
-            case .success(_) :
-                if let data = response.value {
-                    print("[Log] \(data)")
-                }
-                let data = FinedustInfo.getFinedustInfoFromJson(inputData: response.data!, cityName: cityName)
-                completion(data)
-                break ;
-            case .failure(_) :
-                print("[Log] data request is failed, \(response.result)")
-                break;
-            }
-        }
-        )
+}
 
-    }
-    
+
+struct FinedustViewComponents {
+    var currentLoction = ""
+    var pm10Grade = ""
+    var pm10Value = 1
+    var pm25Grade = ""
+    var pm25Value = 1
+    var datetime = ""
+
 }

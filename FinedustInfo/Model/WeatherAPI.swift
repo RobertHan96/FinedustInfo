@@ -31,6 +31,7 @@ struct WeatherApi {
     let iconImageFormat = "@2x.png"
     let defaultImageIconName = "10d@2x.png"
     let params = ["id": "1835841", "appid" : "d75a52a08cd06e4d197f13e394125180"]
+    
     func sendRequest(completion:@escaping (Weather) -> Void) {
         AF.request(baseUrl, method: .get, parameters: params).validate(statusCode: 200..<300).responseJSON { response in
             switch(response.result) {

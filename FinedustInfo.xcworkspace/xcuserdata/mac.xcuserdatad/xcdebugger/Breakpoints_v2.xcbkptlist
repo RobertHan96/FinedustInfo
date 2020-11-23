@@ -23,17 +23,17 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "6E35379B-D8B2-4703-8626-5FDE8E40D7B9"
+            uuid = "0ECB4BBA-9122-4787-AE48-8C1902A1F838"
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "FinedustInfo/Model/IndecatorImgeSelector.swift"
+            filePath = "FinedustInfo/Model/FinedustInfo.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "45"
-            endingLineNumber = "45"
-            landmarkName = "IndecatorImgeSelector"
-            landmarkType = "14">
+            startingLineNumber = "95"
+            endingLineNumber = "95"
+            landmarkName = "getFinedustInfoFromJson(inputData:cityName:)"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

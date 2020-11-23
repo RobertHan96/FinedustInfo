@@ -75,9 +75,9 @@ class WeatherViewController: UIViewController, CLLocationManagerDelegate {
                 let city = (address.last?.locality)! as String
                 let provinceShortForm = String(province[province.startIndex ..< province.index(province.startIndex, offsetBy: 2)])
                 
-                UserDefaults.standard.set(province.makeStringKoreanEncoded(provinceShortForm), forKey: "encodedUserProvince")
+                UserDefaults.standard.set(province.makeStringKoreanEncoded, forKey: "encodedUserProvince")
                 UserDefaults.standard.set(city, forKey: "unEncodedUserCity")
-                UserDefaults.standard.set(city.makeStringKoreanEncoded(city), forKey: "encodedUserCity")
+                UserDefaults.standard.set(city.makeStringKoreanEncoded, forKey: "encodedUserCity")
                 UserDefaults.standard.synchronize()
             }
         }
@@ -107,8 +107,6 @@ class WeatherViewController: UIViewController, CLLocationManagerDelegate {
     }
     
     let backgroundImageView = UIImageView().then {
-        let backgroundImage = UIImage(named: "Good")
-        $0.image = backgroundImage
         $0.backgroundColor = .clear
     }
     let containerView = UIView().then {_ in }

@@ -4,7 +4,6 @@ class MainPageViewController: UIPageViewController, UIPageViewControllerDelegate
     lazy var viewContorllerList : [UIViewController] = {
         let finedustInfoVC = FinedustViewController()
         let weatherVC = WeatherViewController()
-//        let TestVC = TestViewController()
         return [weatherVC, finedustInfoVC]
     }()
 
