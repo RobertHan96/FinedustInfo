@@ -51,7 +51,7 @@ extension Int {
     
     var getIndicatorImageUrl : URL {
         let queryUrl = "http://112.149.126.160:3370/\(self)"
-        var defaultUrl = URL(string: FinedustInfo.defaultUrl)!
+        var defaultUrl = URL(string: FinedustApiConstant.defaultUrl.rawValue)!
         AF.request(queryUrl).validate(statusCode: 200..<300).responseJSON(completionHandler: { response in
             switch(response.result) {
             case .success(let value) :
@@ -60,7 +60,7 @@ extension Int {
                 guard let url = responseURL else { return }
                 defaultUrl = url
             case .failure(_) :
-                print("[Log] data request is failed, \(response.result)")
+                print("logHeader".localized, response.result)
             }
         })
         return defaultUrl

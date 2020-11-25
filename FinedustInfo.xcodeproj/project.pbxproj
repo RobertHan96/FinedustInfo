@@ -15,7 +15,7 @@
 		04948CF424511D010076BE47 /*  FinedistView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04948CF324511D010076BE47 /*  FinedistView.swift */; };
 		04948CF924511D060076BE47 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 04948CF824511D060076BE47 /* Assets.xcassets */; };
 		04948CFC24511D060076BE47 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 04948CFA24511D060076BE47 /* LaunchScreen.storyboard */; };
-		04ABEB5E2457B55000D3392E /* FinedustInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04ABEB5D2457B54F00D3392E /* FinedustInfo.swift */; };
+		04ABEB5E2457B55000D3392E /* FinedustAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04ABEB5D2457B54F00D3392E /* FinedustAPI.swift */; };
 		04ABEB62245816AF00D3392E /*  FinedustViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04ABEB61245816AF00D3392E /*  FinedustViewController.swift */; };
 		04ABEB7824667C8100D3392E /* FinedustInfoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04ABEB7724667C8100D3392E /* FinedustInfoTests.swift */; };
 		04C6E9AA24F80487006CC36C /* IndecatorImgeSelector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C6E9A924F80487006CC36C /* IndecatorImgeSelector.swift */; };
@@ -25,6 +25,9 @@
 		04D3EC2625625BE800B4443D /* MainPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D3EC2525625BE700B4443D /* MainPageViewController.swift */; };
 		04D3EC282563528500B4443D /* TempInfoView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04D3EC272563528500B4443D /* TempInfoView.xib */; };
 		04D3EC2A256352C000B4443D /* TempInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D3EC29256352C000B4443D /* TempInfoView.swift */; };
+		04E33B06256DE239005D31F7 /* Finedust.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E33B05256DE239005D31F7 /* Finedust.swift */; };
+		04E33B0A256DE250005D31F7 /* Weather.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E33B09256DE250005D31F7 /* Weather.swift */; };
+		04E33B10256E050D005D31F7 /* UserLocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E33B0F256E050D005D31F7 /* UserLocationManager.swift */; };
 		04F6191724A2E8BB004F1A9B /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 04F6191624A2E8BB004F1A9B /* GoogleService-Info.plist */; };
 		747CABACABBE97843B823C77 /* Pods_FinedustInfo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A1185E377F017CF9A0A6FF04 /* Pods_FinedustInfo.framework */; };
 /* End PBXBuildFile section */
@@ -53,7 +56,7 @@
 		04948CF824511D060076BE47 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		04948CFB24511D060076BE47 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		04948CFD24511D060076BE47 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		04ABEB5D2457B54F00D3392E /* FinedustInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinedustInfo.swift; sourceTree = "<group>"; };
+		04ABEB5D2457B54F00D3392E /* FinedustAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinedustAPI.swift; sourceTree = "<group>"; };
 		04ABEB61245816AF00D3392E /*  FinedustViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = " FinedustViewController.swift"; sourceTree = "<group>"; };
 		04ABEB7524667C8000D3392E /* FinedustInfoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FinedustInfoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		04ABEB7724667C8100D3392E /* FinedustInfoTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinedustInfoTests.swift; sourceTree = "<group>"; };
@@ -65,6 +68,9 @@
 		04D3EC2525625BE700B4443D /* MainPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPageViewController.swift; sourceTree = "<group>"; };
 		04D3EC272563528500B4443D /* TempInfoView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TempInfoView.xib; sourceTree = "<group>"; };
 		04D3EC29256352C000B4443D /* TempInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TempInfoView.swift; sourceTree = "<group>"; };
+		04E33B05256DE239005D31F7 /* Finedust.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Finedust.swift; sourceTree = "<group>"; };
+		04E33B09256DE250005D31F7 /* Weather.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Weather.swift; sourceTree = "<group>"; };
+		04E33B0F256E050D005D31F7 /* UserLocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserLocationManager.swift; sourceTree = "<group>"; };
 		04F6191324A2E270004F1A9B /* FinedustInfo.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = FinedustInfo.entitlements; sourceTree = "<group>"; };
 		04F6191624A2E8BB004F1A9B /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		059FB8B56EF369AA5194F249 /* Pods-FinedustInfo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FinedustInfo.release.xcconfig"; path = "Target Support Files/Pods-FinedustInfo/Pods-FinedustInfo.release.xcconfig"; sourceTree = "<group>"; };
@@ -94,11 +100,14 @@
 		041AC7D2247FA81000B3227D /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				04C6E9A924F80487006CC36C /* IndecatorImgeSelector.swift */,
-				04ABEB5D2457B54F00D3392E /* FinedustInfo.swift */,
 				041AC7D3247FA82600B3227D /* Extensions.swift */,
-				042CCEB324AC69AF004AB537 /* PushServiceManager.swift */,
+				04C6E9A924F80487006CC36C /* IndecatorImgeSelector.swift */,
+				04ABEB5D2457B54F00D3392E /* FinedustAPI.swift */,
 				04D3EC1D255BBA2600B4443D /* WeatherAPI.swift */,
+				042CCEB324AC69AF004AB537 /* PushServiceManager.swift */,
+				04E33B05256DE239005D31F7 /* Finedust.swift */,
+				04E33B09256DE250005D31F7 /* Weather.swift */,
+				04E33B0F256E050D005D31F7 /* UserLocationManager.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -337,17 +346,20 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				04E33B06256DE239005D31F7 /* Finedust.swift in Sources */,
 				041AC7D4247FA82600B3227D /* Extensions.swift in Sources */,
+				04E33B10256E050D005D31F7 /* UserLocationManager.swift in Sources */,
 				04D3EC22255E02B400B4443D /* WeatherViewController.swift in Sources */,
 				04ABEB62245816AF00D3392E /*  FinedustViewController.swift in Sources */,
 				04948CF424511D010076BE47 /*  FinedistView.swift in Sources */,
 				04C6E9AA24F80487006CC36C /* IndecatorImgeSelector.swift in Sources */,
+				04E33B0A256DE250005D31F7 /* Weather.swift in Sources */,
 				04D3EC24255E037A00B4443D /* WeatherView.swift in Sources */,
 				04D3EC2A256352C000B4443D /* TempInfoView.swift in Sources */,
 				04948CF024511D010076BE47 /* AppDelegate.swift in Sources */,
 				04D3EC1E255BBA2600B4443D /* WeatherAPI.swift in Sources */,
 				04D3EC2625625BE800B4443D /* MainPageViewController.swift in Sources */,
-				04ABEB5E2457B55000D3392E /* FinedustInfo.swift in Sources */,
+				04ABEB5E2457B55000D3392E /* FinedustAPI.swift in Sources */,
 				042CCEB424AC69AF004AB537 /* PushServiceManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

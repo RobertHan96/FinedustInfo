@@ -1,25 +1,6 @@
 import Foundation
 import Alamofire
 import SwiftyJSON
-// OpenWatherAPI 공식문서 메인 : https://openweathermap.org/current#current_JSON
-// 날씨 표기 icon 종류 정리 : https://openweathermap.org/weather-conditions
-
-/*
-1) 키, cityID를 매개변수로 날씨 객체 생성
-2) 비동기로 API 호출
-3) 온도, 최고 온도, 최저 온도, 습도, iconImageUrl 파싱
-4) 3)에서 가져온 정보를 넣어서 Weather 객체 생성
-5) Weather 객체의 정보로 ViewController에 내용 표시
- */
-
-struct Weather {
-    var weatherName = ""
-    var temp : Int = 1
-    var minTemp :Int = 1
-    var maxTemp :Int = 1
-    var humidity :Int = 1
-    var imageUrl = "http://openweathermap.org/img/wn/50n@2x.png"
-}
 
 struct WeatherApi {
     let baseUrl = "http://api.openweathermap.org/data/2.5/weather"
@@ -33,13 +14,13 @@ struct WeatherApi {
             switch(response.result) {
             case .success(_) :
                 if let data = response.value {
-                    print("[Log] 날씨정보\n \(data))")
+                    print("logHeader".localized ,data)
                     let weatherInfo = self.getWeatherFromJson(inputData: response.data!)
                     completion(weatherInfo)
                 }
                 break ;
             case .failure(_):
-                print("[Log] data request is failed, \(response.result)")
+                print("logHeader".localized, response.result)
                 break;
 
             }

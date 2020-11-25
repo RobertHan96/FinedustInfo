@@ -1,3 +1,5 @@
+"logHeader" = "[Log]";
+
 "permissionDeniedAlertTitle" = "Permission Settings denied";
 "permissionDeniedAlertContent" = "Do you want to go to the App Settings screen? \n If you select No, the app will be closed.";
 

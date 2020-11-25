@@ -3,9 +3,7 @@ import Kingfisher
 
 class FinedustViewController: UIViewController{
     let imageSelector = IndecatorImgeSelector()
-    let encodedUserProvince = UserDefaults.standard.object(forKey: "encodedUserProvince") as? String
-    let encodedUserCity = UserDefaults.standard.object(forKey: "encodedUserCity") as? String
-    let unEncodedUserCity = UserDefaults.standard.object(forKey: "unEncodedUserCity") as? String
+    let userLocation = UserLocationManager()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -13,33 +11,35 @@ class FinedustViewController: UIViewController{
         setupUI()
         makeConstraints()
         refreshBtn.addTarget(self, action: #selector(refreshFinedustInfo(_:)), for: .touchUpInside)
-        DispatchQueue.main.async {
-            self.getFinedustInfo()
+        let finedustApi = FinedustAPI(location: userLocation.getEencodedUserProvince())
+        finedustApi.getFinedustData { (finedustData) in
+            print("logHeader".localized, finedustData.location, finedustData.pm10Grade)
+            self.setupUI(finduest: finedustData)
         }
     }
         
     @objc func refreshFinedustInfo(_ sender : UIButton!) {
-        print("Log 미세먼지 정보 재요청...")
+        print("logHeader".localized, "미세먼지 정보 재요청...")
         getFinedustInfo()
     }
     
     func getFinedustInfo() {
-        let defaultProvince = "%EC%84%9C%EC%9A%B8"
-        let defaultCity = "%EA%B4%91%EC%A7%84%EA%B5%AC"
-        FinedustInfo.getFinedustData(sido: defaultProvince, city: defaultCity) { (data) in
-            self.setupUI(componets: data)
+        var finedustApi = FinedustAPI(location: userLocation.getEencodedUserProvince())
+        finedustApi.getFinedustData { (finedustData) in
+            print("logHeader".localized, finedustData.location, finedustData.pm10Grade)
+            self.setupUI(finduest: finedustData)
         }
     }
     
-    func setupUI(componets : FinedustViewComponents) {
-        makeCircleImage(url: componets.imageUrl!)
-        self.indicatorLabel.text = componets.pm10Grade
-        self.finedustIndexLabel.text = String(componets.pm10Value)
-        self.finedustGradeLabel.text = componets.pm10Grade
-        self.ultraFinedustIndexLabel.text = String(componets.pm25Value)
-        self.ultraFinedustGradeLabel.text = componets.pm25Grade
-        self.dateTimeLabel.text = componets.datetime
-        self.LocationNameLabel.text = componets.currentLoction
+    func setupUI(finduest : Finedust) {
+        makeCircleImage(url: finduest.imageUrl)
+        self.indicatorLabel.text = finduest.pm10Grade
+        self.finedustIndexLabel.text = String(finduest.pm10Value)
+        self.finedustGradeLabel.text = finduest.pm10Grade
+        self.ultraFinedustIndexLabel.text = String(finduest.pm25Value)
+        self.ultraFinedustGradeLabel.text = finduest.pm25Grade
+        self.dateTimeLabel.text = finduest.dateTime
+        self.LocationNameLabel.text = finduest.location
         self.view.layoutIfNeeded()
         print("[Log] UI셋팅 완료")
     }

@@ -3,9 +3,13 @@ import SnapKit
 import Then
 import CoreLocation
 
+protocol FinedustDataSource {
+}
+
 class WeatherViewController: UIViewController, CLLocationManagerDelegate {
     var locationManager : CLLocationManager = CLLocationManager()
     var currentLocation : CLLocation!
+    var userLocation : UserLocationManager = UserLocationManager()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -13,15 +17,11 @@ class WeatherViewController: UIViewController, CLLocationManagerDelegate {
         setUserLocation()
         setupUI()
         makeConstraints()
+        let currentLocation = userLocation.getEencodedUserProvince()
         let weatherData = getWeatherData{ (weather) in
             self.setupUIFromWeatherData(weatherData: weather)
         }
-        let currentLocation = getEencodedUserProvince()
-        var finedustApi = FinedustAPI(location: currentLocation)
-        finedustApi.getRequestURL()
-        finedustApi.getFinedustData { (finedust) in
-            print(finedust.currentLoction, finedust.pm10Grade)
-        }
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -49,6 +49,10 @@ class WeatherViewController: UIViewController, CLLocationManagerDelegate {
         }
     }
     
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(true)
+    }
+    
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
         switch(CLLocationManager.authorizationStatus()) {
         case .authorizedAlways, .authorizedWhenInUse:
@@ -66,49 +70,10 @@ class WeatherViewController: UIViewController, CLLocationManagerDelegate {
         locationManager.startUpdatingLocation()
         locationManager.startMonitoringSignificantLocationChanges()
         self.currentLocation = locationManager.location
-        saveLocationToUserDefault(location: self.currentLocation)
-        print("[Log] 현재 위치 : \(getEencodedUserProvince()) - \(getEncodedUserCity())")
+        userLocation.saveLocationToUserDefault(location: self.currentLocation)
+        print("[Log] 현재 위치 : \(userLocation.getEencodedUserProvince()) - \(userLocation.getEncodedUserCity())")
     }
     
-    private func saveLocationToUserDefault(location : CLLocation) {
-        let coord = location.coordinate
-        let currentLocation = CLLocation(latitude: coord.latitude, longitude: coord.longitude)
-        let geoCoorder = CLGeocoder()
-        let locale : Locale = Locale(identifier: "Ko-kr")
-        geoCoorder.reverseGeocodeLocation(currentLocation, preferredLocale: locale) { (place, error) in
-            if let address: [CLPlacemark] = place {
-                let province = (address.last?.administrativeArea)! as String
-                let city = (address.last?.locality)! as String
-                let provinceShortForm = String(province[province.startIndex ..< province.index(province.startIndex, offsetBy: 2)])
-                
-                UserDefaults.standard.set(province.makeStringKoreanEncoded, forKey: "encodedUserProvince")
-                UserDefaults.standard.set(city, forKey: "unEncodedUserCity")
-                UserDefaults.standard.set(city.makeStringKoreanEncoded, forKey: "encodedUserCity")
-                UserDefaults.standard.synchronize()
-            }
-        }
-    }
-    
-    func getUnEncodedUserCity() -> String {
-        guard let city = UserDefaults.standard.object(forKey: "unEncodedUserCity") as? String else { return ""}
-        return city
-    }
-
-    func getEncodedUserCity() -> String {
-        guard let city = UserDefaults.standard.object(forKey: "encodedUserCity") as? String else { return ""}
-        return city
-    }
-  
-    func getEencodedUserProvince() -> String {
-        guard let city = UserDefaults.standard.object(forKey: "encodedUserProvince") as? String
-                        else { return ""}
-        let strIndex = city.index(city.startIndex, offsetBy: 2)
-        let location = city.substring(to: strIndex)
-
-        return location
-    }
-    
-
     private func getWeatherData(completion:@escaping (Weather) -> Void) -> Weather {
         var weatherData : Weather?
         WeatherApi().sendRequest { (weather) in
@@ -131,7 +96,7 @@ class WeatherViewController: UIViewController, CLLocationManagerDelegate {
         let urlData = try? Data(contentsOf: imageUrl!)
         self.weatherIconImageView.image = UIImage(data: urlData!)
     }
-    
+        
     let backgroundImageView = UIImageView().then {
         $0.backgroundColor = .clear
     }

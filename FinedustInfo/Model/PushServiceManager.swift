@@ -1,27 +1,45 @@
 import Foundation
 import FirebaseMessaging
 import FirebaseInstanceID
+import Alamofire
 
-class PushServiceManager {
-    static let DEVICE_TOKEN = UserDefaults.standard.string(forKey: "token")
-    static let pushServerUrl = "http://112.149.126.160:3380/sendToken/"
+struct PushServiceManager {
+    private let DEVICE_TOKEN = UserDefaults.standard.string(forKey: "token")
+    private let pushServerUrl = "http://112.149.126.160:3380/sendToken/"
 
-    static func registerTokenToDB(userToken : String) {
+    func registerTokenToDB(userToken : String) {
         InstanceID.instanceID().instanceID { (result, error) in
             if let error = error {
-                print("Error fetching remote instance ID: \(error)")
+                print("logHeader".localized, error)
             } else if let result = result{
                 setDeviceToken(instantResult: result, token: userToken)
             }
         }
     }
 
-    static func setDeviceToken(instantResult : InstanceIDResult, token : String ) {
-        if instantResult.token != PushServiceManager.DEVICE_TOKEN  {
-                FinedustInfo.postDeviceToken(deviceToken: token)
+    func setDeviceToken(instantResult : InstanceIDResult, token : String ) {
+        if instantResult.token != self.DEVICE_TOKEN  {
+                self.postDeviceToken(deviceToken: token)
                 UserDefaults.standard.set(instantResult.token, forKey: "token")
         } else {
-            print("[Log] 이미 등록된 토큰")
+            print("logHeader".localized, "이미 등록된 토큰")
         }
+    }
+    
+    func postDeviceToken(deviceToken : String) {
+        let pushServer = self.pushServerUrl
+        let params = ["token": deviceToken]
+        AF.request(pushServer, method: .post, parameters: params , encoding:
+            URLEncoding(destination : .queryString), headers: ["Content-Type" : "application/json"]).responseJSON {
+         response in
+         switch response.result {
+                         case .success:
+                          print("logHeader".localized, response)
+                          break
+
+                          case .failure(let error):
+                           print("logHeader".localized, error)
+              }
+         }
     }
 }
