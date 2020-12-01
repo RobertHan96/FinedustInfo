@@ -2,16 +2,7 @@ import UIKit
 import SnapKit
 import Then
 
-extension FinedustViewController {
-    func animbackgroundImage() {
-        DispatchQueue.main.async {
-            UIView.animate(withDuration: 20, delay: 1, options: [.repeat, .autoreverse], animations: {
-                self.backgroundImageView.center.x = 100
-            })
-            self.view.layoutIfNeeded()
-        }
-    }
-    
+extension FinedustViewController {    
     func setupUI() {
         view.addSubview(backgroundImageView)
         view.addSubview(LocationNameLabel)

@@ -1,8 +1,6 @@
 import Foundation
 import Alamofire
 import SwiftyJSON
-import Kingfisher
-
 
 struct IndecatorImgeSelector {
     var finedustGrade : Int = 0

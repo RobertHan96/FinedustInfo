@@ -3,12 +3,17 @@ import UIKit
 import Alamofire
 import SwiftyJSON
 
-
 extension Float {
     var getDegreeFromKelvin: Float {return (self - 273)}
 }
 
 extension String {
+    var localized : String {
+          return NSLocalizedString(self, tableName: "Localizable", value: self, comment: "")
+       }
+    var finedustGradeGood : String { return "Good" }
+    var finedustGradeModerate : String { return "Moderate" }
+    var finedustGradeBad : String { return "Bad" }
     var makeStringKoreanEncoded : String {
         return self.removingPercentEncoding ?? ""
     }
@@ -17,25 +22,15 @@ extension String {
         return self.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)!
     }
 
-    func decodeUrl() -> String?{ return String(describing: self.cString(using: String.Encoding.utf8))}
-    func encodeUrl() -> String?{ return self.addingPercentEncoding( withAllowedCharacters: NSCharacterSet.urlQueryAllowed) }
-
-    var localized : String {
-          return NSLocalizedString(self, tableName: "Localizable", value: self, comment: "")
-       }
-    var finedustGradeGood : String { return "Good" }
-    var finedustGradeModerate : String { return "Moderate" }
-    var finedustGradeBad : String { return "Bad" }
-
 }
 
 extension Int {
-    func checkFinedustGrade(data : Int) -> Int {
-        if data < 16 {
+    var getFinedustGradeNumber : Int {
+        if self < 16 {
             return 1
-        } else if data > 15 || data < 36 {
+        } else if self > 15 || self < 36 {
             return 2
-        } else if data > 35 || data < 76 {
+        } else if self > 35 || self < 76 {
             return 3
         } else {
             return 4
@@ -48,40 +43,6 @@ extension Int {
             IndicatorGradeCase.bad.rawValue : "finedustbad".localized, IndicatorGradeCase.veryBad.rawValue : "finedustVeryBad".localized]
         return  results[self] ?? "finedustGood".localized
     }
-    
-    var getIndicatorImageUrl : URL {
-        let queryUrl = "http://112.149.126.160:3370/\(self)"
-        var defaultUrl = URL(string: FinedustApiConstant.defaultUrl.rawValue)!
-        AF.request(queryUrl).validate(statusCode: 200..<300).responseJSON(completionHandler: { response in
-            switch(response.result) {
-            case .success(let value) :
-                let json = JSON(value)
-                let responseURL = URL(string: json["url"].stringValue)
-                guard let url = responseURL else { return }
-                defaultUrl = url
-            case .failure(_) :
-                print("logHeader".localized, response.result)
-            }
-        })
-        return defaultUrl
-    }
-    
-//    func getIndicatorImageUrl(finedustGrade : Int, completion:@escaping (URL) -> Void){
-//        let queryUrl = "http://112.149.126.160:3370/\(finedustGrade)"
-//        let urlForError : URL = URL(string : "https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FkIqsC%2FbtqEGT92fDc%2FHdq9Qowhgxvbrn94igvzMK%2Fimg.png")!
-//        AF.request(queryUrl).validate(statusCode: 200..<300).responseJSON(completionHandler: { response in
-//            switch(response.result) {
-//            case .success(let value) :
-//                let json = JSON(value)
-//                let responseURL = URL(string: json["url"].stringValue)
-//                guard let url = responseURL else { return }
-//                completion(url)
-//            case .failure(_) :
-//                print("[Log] data request is failed, \(response.result)")
-//                completion(urlForError)
-//            }
-//        })
-//    }
 }
 
 extension UIAlertController {

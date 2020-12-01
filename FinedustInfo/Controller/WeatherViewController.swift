@@ -3,13 +3,11 @@ import SnapKit
 import Then
 import CoreLocation
 
-protocol FinedustDataSource {
-}
-
 class WeatherViewController: UIViewController, CLLocationManagerDelegate {
     var locationManager : CLLocationManager = CLLocationManager()
     var currentLocation : CLLocation!
     var userLocation : UserLocationManager = UserLocationManager()
+    let ad = AppDelegate()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,11 +19,6 @@ class WeatherViewController: UIViewController, CLLocationManagerDelegate {
         let weatherData = getWeatherData{ (weather) in
             self.setupUIFromWeatherData(weatherData: weather)
         }
-        
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(true)
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -47,10 +40,6 @@ class WeatherViewController: UIViewController, CLLocationManagerDelegate {
             alert.addAction(okAction)
             self.present(alert, animated: true, completion: nil)
         }
-    }
-    
-    override func viewDidDisappear(_ animated: Bool) {
-        super.viewDidDisappear(true)
     }
     
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
@@ -92,9 +81,13 @@ class WeatherViewController: UIViewController, CLLocationManagerDelegate {
         self.weatherNameLabel.text = weatherData.weatherName
         self.tempLabel.text = String(weatherData.temp)
         
+        let imageName = Weather().getImageName(weatherData.weatherName)
         let imageUrl = URL(string: weatherData.imageUrl)
+        let backgroundImage = UIImage(named: imageName)
         let urlData = try? Data(contentsOf: imageUrl!)
+        self.backgroundImageView.image = backgroundImage
         self.weatherIconImageView.image = UIImage(data: urlData!)
+        self.ad.imageName = imageName
     }
         
     let backgroundImageView = UIImageView().then {

@@ -10,8 +10,10 @@ target 'FinedustInfo' do
   pod 'Then'
   pod 'Alamofire', '~> 5.1'
   pod 'SwiftyJSON', '~> 4.o'
-  pod 'Kingfisher', '~> 5.0'
+  pod 'SDWebImage', '~> 5.0'
   pod 'Firebase/Analytics'
   pod 'Firebase/Messaging'
-  
+  pod 'Firebase/Firestore'
+  pod 'Firebase/Storage'
+  pod 'Google-Mobile-Ads-SDK'
 end

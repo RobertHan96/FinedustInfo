@@ -3,6 +3,11 @@ import SnapKit
 import Then
 
 extension WeatherViewController {
+    func setBackgroundImageByWeather(_ weather  : String) {
+        let weatherImageName = weather
+        backgroundImageView.image = UIImage(named: weatherImageName)
+    }
+    
     func setupUI() {
         view.addSubview(backgroundImageView)
         view.addSubview(containerView)

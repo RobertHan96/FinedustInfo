@@ -1,6 +1,7 @@
 import Foundation
 import FirebaseMessaging
 import FirebaseInstanceID
+import Firebase
 import Alamofire
 
 struct PushServiceManager {
@@ -19,12 +20,19 @@ struct PushServiceManager {
 
     func setDeviceToken(instantResult : InstanceIDResult, token : String ) {
         if instantResult.token != self.DEVICE_TOKEN  {
-                self.postDeviceToken(deviceToken: token)
+//                self.postDeviceToken(deviceToken: token)
+                self.sendToken(token)
                 UserDefaults.standard.set(instantResult.token, forKey: "token")
         } else {
             print("logHeader".localized, "이미 등록된 토큰")
         }
     }
+    
+    func sendToken(_ token : String) {
+        let db = Firestore.firestore()
+        db.collection("Tokens").addDocument(data: ["token" : token])
+    }
+    
     
     func postDeviceToken(deviceToken : String) {
         let pushServer = self.pushServerUrl

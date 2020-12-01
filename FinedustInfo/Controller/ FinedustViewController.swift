@@ -1,20 +1,24 @@
 import UIKit
-import Kingfisher
+import GoogleMobileAds
+import SDWebImage
 
 class FinedustViewController: UIViewController{
     let imageSelector = IndecatorImgeSelector()
+    let ad = AppDelegate()
+    var bannerView : GADBannerView!
     let userLocation = UserLocationManager()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .white
+        makeAndPresentBanner()
+        adViewDidReceiveAd(bannerView)
         setupUI()
         makeConstraints()
         refreshBtn.addTarget(self, action: #selector(refreshFinedustInfo(_:)), for: .touchUpInside)
         let finedustApi = FinedustAPI(location: userLocation.getEencodedUserProvince())
+        
         finedustApi.getFinedustData { (finedustData) in
-            print("logHeader".localized, finedustData.location, finedustData.pm10Grade)
-            self.setupUI(finduest: finedustData)
+            self.setupUI(finduest: finedustData)            
         }
     }
         
@@ -23,8 +27,13 @@ class FinedustViewController: UIViewController{
         getFinedustInfo()
     }
     
+    func adViewDidReceiveAd(_ bannerView: GADBannerView) {
+        print("Google Admob is being initialized")
+        addBannerViewToView(bannerView)
+    }
+
     func getFinedustInfo() {
-        var finedustApi = FinedustAPI(location: userLocation.getEencodedUserProvince())
+        let finedustApi = FinedustAPI(location: userLocation.getEencodedUserProvince())
         finedustApi.getFinedustData { (finedustData) in
             print("logHeader".localized, finedustData.location, finedustData.pm10Grade)
             self.setupUI(finduest: finedustData)
@@ -32,7 +41,11 @@ class FinedustViewController: UIViewController{
     }
     
     func setupUI(finduest : Finedust) {
-        makeCircleImage(url: finduest.imageUrl)
+        view.backgroundColor = .white
+        setBackgroundImage()
+        finduest.getGradeImage(grade: finduest.pm10Value.getFinedustGradeNumber) { (url) in
+            self.indicatorFaceImageView.sd_setImage(with: url)
+        }
         self.indicatorLabel.text = finduest.pm10Grade
         self.finedustIndexLabel.text = String(finduest.pm10Value)
         self.finedustGradeLabel.text = finduest.pm10Grade
@@ -44,14 +57,43 @@ class FinedustViewController: UIViewController{
         print("[Log] UI셋팅 완료")
     }
     
-    func makeCircleImage(url : URL) {
-        let imageSize =  self.indicatorFaceImageView.bounds.size
-        let processor = DownsamplingImageProcessor(size: imageSize)
-            |> RoundCornerImageProcessor(cornerRadius: 10)
-        self.indicatorFaceImageView.kf.indicatorType = .activity
-        self.indicatorFaceImageView.kf.setImage(with: url, options:
-            [ .processor(processor) ])
+    func setBackgroundImage() {
+        guard let backgroundImage = ad.imageName else { return }
+        print("Log FineImage", backgroundImage)
+        self.backgroundImageView.image = UIImage(named: backgroundImage)
     }
+    
+    func makeAndPresentBanner() {
+        bannerView = GADBannerView(adSize: kGADAdSizeLargeBanner)
+       bannerView.adUnitID = "ca-app-pub-9675419556052392/5030940026"
+        // 테스트용 광고ID
+//        bannerView.adUnitID = "ca-app-pub-3940256099942544/2934735716"
+        bannerView.rootViewController = self
+        bannerView.load(GADRequest())
+    }
+
+    // 광고배너의 위치를 지정하는 함수
+    func addBannerViewToView(_ bannerView: GADBannerView) {
+      bannerView.translatesAutoresizingMaskIntoConstraints = false
+      view.addSubview(bannerView)
+      view.addConstraints(
+        [NSLayoutConstraint(item: bannerView,
+                            attribute: .bottom,
+                            relatedBy: .equal,
+                            toItem: bottomLayoutGuide,
+                            attribute: .top,
+                            multiplier: 1,
+                            constant: 0),
+         NSLayoutConstraint(item: bannerView,
+                            attribute: .centerX,
+                            relatedBy: .equal,
+                            toItem: view,
+                            attribute: .centerX,
+                            multiplier: 1,
+                            constant: 0)
+        ])
+     }
+    
     let backgroundImageView = UIImageView().then { _ in }
     let containerView = UIImageView().then {_ in }
     let detailInfoView = UIView().then {

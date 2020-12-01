@@ -6,6 +6,7 @@ import FirebaseMessaging
 class AppDelegate: UIResponder, UIApplicationDelegate, MessagingDelegate, UNUserNotificationCenterDelegate {
     var window: UIWindow?
     var navationController : UINavigationController?
+    var imageName : String?
     
     func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
         Messaging.messaging().apnsToken = deviceToken
@@ -23,7 +24,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, MessagingDelegate, UNUser
         let dataDict: [String: String] = ["token": fcmToken]
         print("[Log] DeviceToken ", fcmToken)
         NotificationCenter.default.post(name: Notification.Name("FCMToken"), object: nil, userInfo: dataDict)
-//        PushServiceManager.registerTokenToDB(userToken: fcmToken)
+        PushServiceManager().registerTokenToDB(userToken: fcmToken)
     }
     
     
