@@ -47,7 +47,7 @@ extension FinedustViewController {
         }
         refreshBtn.snp.makeConstraints { (make) in
             make.right.equalTo(self.view.safeAreaLayoutGuide.snp.right).offset(-20)
-            make.centerY.equalTo(locationImageView).offset(40)
+            make.centerY.equalTo(locationImageView).offset(0)
             make.height.equalTo(20)
             make.width.equalTo(20)
         }

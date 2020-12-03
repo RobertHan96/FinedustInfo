@@ -9,6 +9,8 @@ extension WeatherViewController {
     }
     
     func setupUI() {
+        currentViewIndicatorCollectionView.delegate = self
+        currentViewIndicatorCollectionView.dataSource = self
         view.addSubview(backgroundImageView)
         view.addSubview(containerView)
         view.addSubview(weatherIconImageView)
@@ -16,6 +18,7 @@ extension WeatherViewController {
         view.addSubview(weatherNameLabel)
         view.addSubview(tempLabelContainerView)
         view.addSubview(tempLabel)
+        view.addSubview(currentViewIndicatorCollectionView)
     }
     
     func makeConstraints() {
@@ -57,7 +60,12 @@ extension WeatherViewController {
             make.right.equalTo(self.containerView.snp.right).offset(0)
             make.height.greaterThanOrEqualTo(100)
         }
+        currentViewIndicatorCollectionView.snp.makeConstraints { (make) in
+            make.top.equalTo(self.tempLabelContainerView.snp.bottom).offset(0)
+            make.centerX.equalTo(self.backgroundImageView).offset(0)
+            make.width.equalTo(self.backgroundImageView.snp.width).multipliedBy(0.3)
+            make.bottom.equalTo(self.backgroundImageView.snp.bottom).offset(-10)
+        }
+        
     }
-    
-    
 }

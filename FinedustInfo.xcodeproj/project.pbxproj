@@ -28,6 +28,8 @@
 		04E33B06256DE239005D31F7 /* Finedust.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E33B05256DE239005D31F7 /* Finedust.swift */; };
 		04E33B0A256DE250005D31F7 /* Weather.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E33B09256DE250005D31F7 /* Weather.swift */; };
 		04E33B10256E050D005D31F7 /* UserLocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E33B0F256E050D005D31F7 /* UserLocationManager.swift */; };
+		04EBB7B5257899480041917E /* CurrentViewIndicatorCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04EBB7B3257899480041917E /* CurrentViewIndicatorCell.swift */; };
+		04EBB7B6257899480041917E /* CurrentViewIndicatorCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04EBB7B4257899480041917E /* CurrentViewIndicatorCell.xib */; };
 		04F6191724A2E8BB004F1A9B /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 04F6191624A2E8BB004F1A9B /* GoogleService-Info.plist */; };
 		747CABACABBE97843B823C77 /* Pods_FinedustInfo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A1185E377F017CF9A0A6FF04 /* Pods_FinedustInfo.framework */; };
 /* End PBXBuildFile section */
@@ -71,6 +73,8 @@
 		04E33B05256DE239005D31F7 /* Finedust.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Finedust.swift; sourceTree = "<group>"; };
 		04E33B09256DE250005D31F7 /* Weather.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Weather.swift; sourceTree = "<group>"; };
 		04E33B0F256E050D005D31F7 /* UserLocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserLocationManager.swift; sourceTree = "<group>"; };
+		04EBB7B3257899480041917E /* CurrentViewIndicatorCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentViewIndicatorCell.swift; sourceTree = "<group>"; };
+		04EBB7B4257899480041917E /* CurrentViewIndicatorCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CurrentViewIndicatorCell.xib; sourceTree = "<group>"; };
 		04F6191324A2E270004F1A9B /* FinedustInfo.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = FinedustInfo.entitlements; sourceTree = "<group>"; };
 		04F6191624A2E8BB004F1A9B /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		059FB8B56EF369AA5194F249 /* Pods-FinedustInfo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FinedustInfo.release.xcconfig"; path = "Target Support Files/Pods-FinedustInfo/Pods-FinedustInfo.release.xcconfig"; sourceTree = "<group>"; };
@@ -166,6 +170,8 @@
 				04D3EC23255E037A00B4443D /* WeatherView.swift */,
 				04D3EC272563528500B4443D /* TempInfoView.xib */,
 				04D3EC29256352C000B4443D /* TempInfoView.swift */,
+				04EBB7B3257899480041917E /* CurrentViewIndicatorCell.swift */,
+				04EBB7B4257899480041917E /* CurrentViewIndicatorCell.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -284,6 +290,7 @@
 				04948CFC24511D060076BE47 /* LaunchScreen.storyboard in Resources */,
 				0492D384248F63D10009B6DC /* InfoPlist.strings in Resources */,
 				04D3EC282563528500B4443D /* TempInfoView.xib in Resources */,
+				04EBB7B6257899480041917E /* CurrentViewIndicatorCell.xib in Resources */,
 				04F6191724A2E8BB004F1A9B /* GoogleService-Info.plist in Resources */,
 				0492D37E248F625E0009B6DC /* Localizable.strings in Resources */,
 				04948CF924511D060076BE47 /* Assets.xcassets in Resources */,
@@ -350,6 +357,7 @@
 				041AC7D4247FA82600B3227D /* Extensions.swift in Sources */,
 				04E33B10256E050D005D31F7 /* UserLocationManager.swift in Sources */,
 				04D3EC22255E02B400B4443D /* WeatherViewController.swift in Sources */,
+				04EBB7B5257899480041917E /* CurrentViewIndicatorCell.swift in Sources */,
 				04ABEB62245816AF00D3392E /*  FinedustViewController.swift in Sources */,
 				04948CF424511D010076BE47 /*  FinedistView.swift in Sources */,
 				04C6E9AA24F80487006CC36C /* IndecatorImgeSelector.swift in Sources */,

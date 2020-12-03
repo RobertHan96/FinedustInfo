@@ -20,7 +20,6 @@ struct PushServiceManager {
 
     func setDeviceToken(instantResult : InstanceIDResult, token : String ) {
         if instantResult.token != self.DEVICE_TOKEN  {
-//                self.postDeviceToken(deviceToken: token)
                 self.sendToken(token)
                 UserDefaults.standard.set(instantResult.token, forKey: "token")
         } else {

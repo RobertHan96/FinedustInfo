@@ -90,6 +90,15 @@ class WeatherViewController: UIViewController, CLLocationManagerDelegate {
         self.ad.imageName = imageName
     }
         
+    let currentViewIndicatorCollectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewLayout()).then {
+        let layout = UICollectionViewFlowLayout()
+        $0.register(UINib(nibName: "CurrentViewIndicatorCell", bundle: nil),
+            forCellWithReuseIdentifier: "CurrentViewIndicatorCell")
+        $0.backgroundColor = .none
+        layout.scrollDirection = .vertical
+        layout.itemSize = .init(width: 20, height: 20)
+        $0.collectionViewLayout = layout
+    }
     let backgroundImageView = UIImageView().then {
         $0.backgroundColor = .clear
     }
@@ -120,4 +129,15 @@ class WeatherViewController: UIViewController, CLLocationManagerDelegate {
         $0.setContentCompressionResistancePriority(.required, for: .vertical)
     }
     let tempLabelContainerView = TempInfoView()
+}
+
+extension WeatherViewController :  UICollectionViewDelegate, UICollectionViewDataSource {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return MainPageViewController().viewContorllerList.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CurrentViewIndicatorCell", for: indexPath) as? CurrentViewIndicatorCell else { return UICollectionViewCell() }
+        return cell
+    }
 }
