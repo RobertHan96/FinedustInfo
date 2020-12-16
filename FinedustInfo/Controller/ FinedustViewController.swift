@@ -65,9 +65,9 @@ class FinedustViewController: UIViewController{
     
     func makeAndPresentBanner() {
         bannerView = GADBannerView(adSize: kGADAdSizeLargeBanner)
-       bannerView.adUnitID = "ca-app-pub-9675419556052392/5030940026"
+//       bannerView.adUnitID = "ca-app-pub-9675419556052392/5030940026"
         // 테스트용 광고ID
-//        bannerView.adUnitID = "ca-app-pub-3940256099942544/2934735716"
+        bannerView.adUnitID = "ca-app-pub-3940256099942544/2934735716"
         bannerView.rootViewController = self
         bannerView.load(GADRequest())
     }
@@ -83,7 +83,7 @@ class FinedustViewController: UIViewController{
                             toItem: bottomLayoutGuide,
                             attribute: .top,
                             multiplier: 1,
-                            constant: 0),
+                            constant: -20),
          NSLayoutConstraint(item: bannerView,
                             attribute: .centerX,
                             relatedBy: .equal,
@@ -94,6 +94,16 @@ class FinedustViewController: UIViewController{
         ])
      }
     
+    let currentViewIndicatorCollectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewLayout()).then {
+        let layout = UICollectionViewFlowLayout()
+        $0.register(UINib(nibName: "CurrentViewIndicatorCell", bundle: nil),
+            forCellWithReuseIdentifier: "CurrentViewIndicatorCell")
+        $0.backgroundColor = .none
+        layout.minimumLineSpacing = 3
+        layout.scrollDirection = .vertical
+        layout.itemSize = .init(width: 20, height: 20)
+        $0.collectionViewLayout = layout
+    }
     let backgroundImageView = UIImageView().then { _ in }
     let containerView = UIImageView().then {_ in }
     let detailInfoView = UIView().then {
@@ -168,4 +178,19 @@ class FinedustViewController: UIViewController{
         $0.textColor = .darkGray
     }
 
+}
+
+extension FinedustViewController :  UICollectionViewDelegate, UICollectionViewDataSource {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return MainPageViewController().viewContorllerList.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CurrentViewIndicatorCell", for: indexPath) as? CurrentViewIndicatorCell else { return UICollectionViewCell() }
+        if indexPath.row == 1 {
+            let image = UIImage(named: "fillCircle")
+            cell.currentViewImage.image = image
+        }
+        return cell
+    }
 }

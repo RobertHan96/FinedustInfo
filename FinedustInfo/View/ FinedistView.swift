@@ -4,6 +4,9 @@ import Then
 
 extension FinedustViewController {    
     func setupUI() {
+        currentViewIndicatorCollectionView.delegate = self
+        currentViewIndicatorCollectionView.dataSource = self
+        view.addSubview(currentViewIndicatorCollectionView)
         view.addSubview(backgroundImageView)
         view.addSubview(LocationNameLabel)
         view.addSubview(containerView)
@@ -52,17 +55,17 @@ extension FinedustViewController {
             make.width.equalTo(20)
         }
         indicatorFaceImageView.snp.makeConstraints { (make) in
-            make.top.equalTo(self.locationImageView.snp.bottom).offset(40)
+            make.top.lessThanOrEqualTo(self.locationImageView.snp.bottom).offset(60)
             make.centerX.equalTo(self.containerView).offset(0)
-            make.height.lessThanOrEqualTo(200)
-            make.width.lessThanOrEqualTo(200)
+            make.height.lessThanOrEqualTo(250)
+            make.width.lessThanOrEqualTo(250)
         }
         indicatorLabel.snp.makeConstraints { (make) in
             make.centerX.equalTo(self.indicatorFaceImageView).offset(0)
             make.top.equalTo(self.indicatorFaceImageView.snp.bottom).offset(30)
         }
         detailInfoView.snp.makeConstraints { (make) in
-            make.top.equalTo(self.indicatorLabel.snp.bottom).offset(30)
+            make.top.lessThanOrEqualTo(self.indicatorLabel.snp.bottom).offset(50)
             make.left.equalTo(self.view.safeAreaLayoutGuide.snp.left).offset(20)
             make.right.equalTo(self.view.safeAreaLayoutGuide.snp.right).offset(-20)
             make.bottom.equalTo(self.ultraFinedustIndexLabel.snp.bottom).offset(20)
@@ -96,6 +99,13 @@ extension FinedustViewController {
             make.bottom.equalTo(self.containerView.snp.bottom).offset(-15)
             make.left.equalTo(self.containerView.snp.left).offset(20)
             make.right.equalTo(self.containerView.snp.right).offset(-20)
+        }
+        currentViewIndicatorCollectionView.snp.makeConstraints { (make) in
+            make.centerX.equalTo(self.detailInfoView).offset(0)
+            make.bottom.equalTo(self.backgroundImageView.snp.bottom).offset(-10)
+            make.top.greaterThanOrEqualTo(self.detailInfoView.snp.bottom).offset(0)
+            make.height.equalTo(24)
+            make.width.equalTo(50)
         }
     }
 }

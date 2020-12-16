@@ -1,6 +1,7 @@
 import UIKit
 import SnapKit
 import Then
+import GoogleMobileAds
 import CoreLocation
 
 class WeatherViewController: UIViewController, CLLocationManagerDelegate {
@@ -8,6 +9,7 @@ class WeatherViewController: UIViewController, CLLocationManagerDelegate {
     var currentLocation : CLLocation!
     var userLocation : UserLocationManager = UserLocationManager()
     let ad = AppDelegate()
+    var bannerView : GADBannerView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -75,11 +77,11 @@ class WeatherViewController: UIViewController, CLLocationManagerDelegate {
     
     private func setupUIFromWeatherData(weatherData : Weather) {
         print("Log",weatherData)
-        self.tempLabelContainerView.minTempValueLabel.text = String(weatherData.minTemp)
-        self.tempLabelContainerView.maxTempValueLabel.text = String(weatherData.maxTemp)
+        self.tempLabelContainerView.minTempValueLabel.text = "\(weatherData.minTemp)℃"
+        self.tempLabelContainerView.maxTempValueLabel.text = "\(weatherData.maxTemp)℃"
         self.tempLabelContainerView.humidityValueLabel.text = "\(weatherData.humidity)%"
         self.weatherNameLabel.text = weatherData.weatherName
-        self.tempLabel.text = String(weatherData.temp)
+        self.tempLabel.text = "\(weatherData.temp)℃"
         
         let imageName = Weather().getImageName(weatherData.weatherName)
         let imageUrl = URL(string: weatherData.imageUrl)
@@ -95,6 +97,7 @@ class WeatherViewController: UIViewController, CLLocationManagerDelegate {
         $0.register(UINib(nibName: "CurrentViewIndicatorCell", bundle: nil),
             forCellWithReuseIdentifier: "CurrentViewIndicatorCell")
         $0.backgroundColor = .none
+        layout.minimumLineSpacing = 1
         layout.scrollDirection = .vertical
         layout.itemSize = .init(width: 20, height: 20)
         $0.collectionViewLayout = layout
@@ -138,6 +141,10 @@ extension WeatherViewController :  UICollectionViewDelegate, UICollectionViewDat
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CurrentViewIndicatorCell", for: indexPath) as? CurrentViewIndicatorCell else { return UICollectionViewCell() }
+        if indexPath.row == 0 {
+            let image = UIImage(named: "fillCircle")
+            cell.currentViewImage.image = image
+        }
         return cell
     }
 }

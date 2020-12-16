@@ -43,12 +43,4 @@ extension MainPageViewController {
         }
         return viewContorllerList[afterIndex]
     }
-    
-    func pageViewController(_ pageViewController: UIPageViewController, didFinishAnimating finished: Bool, previousViewControllers: [UIViewController], transitionCompleted completed: Bool) {
-        if completed == true{
-            let currentTag = pageViewController.viewControllers!.first!.view.tag
-            print("현재 보고 있는 페이지는 \(currentTag+1) 번째 입니다.")            
-        }
-    }
-
 }

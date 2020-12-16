@@ -34,36 +34,38 @@ extension WeatherViewController {
             make.right.equalTo(self.backgroundImageView.snp.right).offset(0)
             make.height.equalTo(self.view.safeAreaLayoutGuide.snp.height).multipliedBy(0.7)
         }
-        weatherIconImageView.snp.makeConstraints { (make) in
-            make.top.equalTo(self.containerView.snp.top).offset(12)
-            make.width.equalTo(200)
-            make.height.equalTo(200)
-            make.left.equalTo(self.containerView.snp.left).offset(0)
-        }
         cityNameLabel.snp.makeConstraints { (make) in
-            make.top.equalTo(self.weatherIconImageView.snp.bottom).offset(8)
+            make.top.equalTo(self.containerView.snp.top).offset(20)
             make.left.equalTo(self.containerView.snp.left).offset(0)
             make.right.greaterThanOrEqualTo(self.containerView.snp.right).offset(-20)
         }
-        weatherNameLabel.snp.makeConstraints { (make) in
-            make.top.equalTo(self.cityNameLabel.snp.bottom).offset(8)
+        weatherIconImageView.snp.makeConstraints { (make) in
+            make.top.equalTo(self.cityNameLabel.snp.bottom).offset(12)
+            make.width.equalTo(100)
+            make.height.equalTo(100)
             make.left.equalTo(self.containerView.snp.left).offset(0)
+        }
+        weatherNameLabel.snp.makeConstraints { (make) in
+            make.centerY.equalTo(self.weatherIconImageView)
+            make.left.equalTo(self.weatherIconImageView.snp.right).offset(12)
             make.right.greaterThanOrEqualTo(self.tempLabel.snp.left).offset(-20)
         }
         tempLabel.snp.makeConstraints { (make) in
-            make.centerY.equalTo(self.weatherNameLabel)
+            make.top.equalTo(weatherIconImageView.snp.bottom).offset(12)
+            make.left.equalTo(self.containerView.snp.left).offset(0)
             make.right.lessThanOrEqualTo(self.containerView.snp.right).offset(-20)
         }
         tempLabelContainerView.snp.makeConstraints { (make) in
-            make.top.equalTo(weatherNameLabel.snp.bottom).offset(14)
+            make.top.equalTo(tempLabel.snp.bottom).offset(14)
             make.left.equalTo(self.containerView.snp.left).offset(0)
             make.right.equalTo(self.containerView.snp.right).offset(0)
             make.height.greaterThanOrEqualTo(100)
         }
         currentViewIndicatorCollectionView.snp.makeConstraints { (make) in
-            make.top.equalTo(self.tempLabelContainerView.snp.bottom).offset(0)
+            make.top.greaterThanOrEqualTo(self.tempLabelContainerView.snp.bottom).offset(0)
             make.centerX.equalTo(self.backgroundImageView).offset(0)
-            make.width.equalTo(self.backgroundImageView.snp.width).multipliedBy(0.3)
+            make.height.equalTo(24)
+            make.width.equalTo(50)
             make.bottom.equalTo(self.backgroundImageView.snp.bottom).offset(-10)
         }
         
