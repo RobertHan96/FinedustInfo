@@ -5,13 +5,10 @@ import SDWebImage
 class FinedustViewController: UIViewController{
     let imageSelector = IndecatorImgeSelector()
     let ad = AppDelegate()
-    var bannerView : GADBannerView!
     let userLocation = UserLocationManager()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        makeAndPresentBanner()
-        adViewDidReceiveAd(bannerView)
         setupUI()
         makeConstraints()
         refreshBtn.addTarget(self, action: #selector(refreshFinedustInfo(_:)), for: .touchUpInside)
@@ -27,11 +24,6 @@ class FinedustViewController: UIViewController{
         getFinedustInfo()
     }
     
-    func adViewDidReceiveAd(_ bannerView: GADBannerView) {
-        print("Google Admob is being initialized")
-        addBannerViewToView(bannerView)
-    }
-
     func getFinedustInfo() {
         let finedustApi = FinedustAPI(location: userLocation.getEencodedUserProvince())
         finedustApi.getFinedustData { (finedustData) in
@@ -62,37 +54,6 @@ class FinedustViewController: UIViewController{
         print("Log FineImage", backgroundImage)
         self.backgroundImageView.image = UIImage(named: backgroundImage)
     }
-    
-    func makeAndPresentBanner() {
-        bannerView = GADBannerView(adSize: kGADAdSizeLargeBanner)
-//       bannerView.adUnitID = "ca-app-pub-9675419556052392/5030940026"
-        // 테스트용 광고ID
-        bannerView.adUnitID = "ca-app-pub-3940256099942544/2934735716"
-        bannerView.rootViewController = self
-        bannerView.load(GADRequest())
-    }
-
-    // 광고배너의 위치를 지정하는 함수
-    func addBannerViewToView(_ bannerView: GADBannerView) {
-      bannerView.translatesAutoresizingMaskIntoConstraints = false
-      view.addSubview(bannerView)
-      view.addConstraints(
-        [NSLayoutConstraint(item: bannerView,
-                            attribute: .bottom,
-                            relatedBy: .equal,
-                            toItem: bottomLayoutGuide,
-                            attribute: .top,
-                            multiplier: 1,
-                            constant: -20),
-         NSLayoutConstraint(item: bannerView,
-                            attribute: .centerX,
-                            relatedBy: .equal,
-                            toItem: view,
-                            attribute: .centerX,
-                            multiplier: 1,
-                            constant: 0)
-        ])
-     }
     
     let currentViewIndicatorCollectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewLayout()).then {
         let layout = UICollectionViewFlowLayout()

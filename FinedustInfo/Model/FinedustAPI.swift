@@ -6,7 +6,9 @@ import SwiftyJSON
 enum FinedustApiConstant : String {
     case defaultImageUrl = "https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FkIqsC%2FbtqEGT92fDc%2FHdq9Qowhgxvbrn94igvzMK%2Fimg.png"
     case apiKey = "ZiSNIwgl%2BWu%2FVFxTGPUa%2FCHGRtQTKy4RRj88RPZbBXz0hhxW2c9L7nBijrKzinyX4dHrc%2FBhHjh6EH0nqAsJaw%3D%3D"
-    case baseUrl = "http://openapi.airkorea.or.kr/openapi/services/rest/ArpltnInforInqireSvc/getCtprvnMesureSidoLIst?sidoName=%EC%84%9C%EC%9A%B8&searchCondition=DAILY&serviceKey=ZiSNIwgl%2BWu%2FVFxTGPUa%2FCHGRtQTKy4RRj88RPZbBXz0hhxW2c9L7nBijrKzinyX4dHrc%2FBhHjh6EH0nqAsJaw%3D%3D&_returnType=json"
+    case baseUrl =
+ "http://apis.data.go.kr/B552584/ArpltnStatsSvc/getCtprvnMesureSidoLIst?sidoName=%EC%84%9C%EC%9A%B8&searchCondition=HOUR&pageNo=1&numOfRows=100&returnType=json&serviceKey=ZiSNIwgl%2BWu%2FVFxTGPUa%2FCHGRtQTKy4RRj88RPZbBXz0hhxW2c9L7nBijrKzinyX4dHrc%2FBhHjh6EH0nqAsJaw%3D%3D"
+    
 }
 
 struct FinedustAPI {
@@ -49,7 +51,9 @@ struct FinedustAPI {
     
     func getFinedustFromJson(inputData : Data) -> Finedust {
         if let json = try? JSON(data: inputData) {
-            let list = json["list"].arrayValue
+            let list = json["response"]["body"]["items"].arrayValue
+            print("log tt", list)
+
             let citis = list.filter{ city -> Bool in
                 return city.arrayValue != nil
         }

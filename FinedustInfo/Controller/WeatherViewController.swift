@@ -9,8 +9,7 @@ class WeatherViewController: UIViewController, CLLocationManagerDelegate {
     var currentLocation : CLLocation!
     var userLocation : UserLocationManager = UserLocationManager()
     let ad = AppDelegate()
-    var bannerView : GADBannerView!
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = .white
