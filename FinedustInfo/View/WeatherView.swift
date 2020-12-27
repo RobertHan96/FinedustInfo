@@ -35,7 +35,7 @@ extension WeatherViewController {
             make.height.equalTo(self.view.safeAreaLayoutGuide.snp.height).multipliedBy(0.7)
         }
         cityNameLabel.snp.makeConstraints { (make) in
-            make.top.equalTo(self.containerView.snp.top).offset(20)
+            make.top.lessThanOrEqualTo(self.containerView.snp.top).offset(60)
             make.left.equalTo(self.containerView.snp.left).offset(0)
             make.right.greaterThanOrEqualTo(self.containerView.snp.right).offset(-20)
         }
@@ -64,8 +64,8 @@ extension WeatherViewController {
         currentViewIndicatorCollectionView.snp.makeConstraints { (make) in
             make.top.greaterThanOrEqualTo(self.tempLabelContainerView.snp.bottom).offset(0)
             make.centerX.equalTo(self.backgroundImageView).offset(0)
-            make.height.equalTo(24)
-            make.width.equalTo(50)
+            make.height.equalTo(20)
+            make.width.equalTo(40)
             make.bottom.equalTo(self.backgroundImageView.snp.bottom).offset(-10)
         }
         

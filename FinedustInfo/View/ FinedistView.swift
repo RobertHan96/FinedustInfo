@@ -96,16 +96,16 @@ extension FinedustViewController {
             make.centerX.equalTo(self.ultraFinedustGradeLabel).offset(0)
         }
         dateTimeLabel.snp.makeConstraints { (make) in
-            make.bottom.equalTo(self.containerView.snp.bottom).offset(-15)
+            make.top.equalTo(self.detailInfoView.snp.bottom).offset(10)
             make.left.equalTo(self.containerView.snp.left).offset(20)
             make.right.equalTo(self.containerView.snp.right).offset(-20)
         }
         currentViewIndicatorCollectionView.snp.makeConstraints { (make) in
             make.centerX.equalTo(self.detailInfoView).offset(0)
             make.bottom.equalTo(self.backgroundImageView.snp.bottom).offset(-10)
-            make.top.greaterThanOrEqualTo(self.detailInfoView.snp.bottom).offset(0)
-            make.height.equalTo(24)
-            make.width.equalTo(50)
+            make.top.greaterThanOrEqualTo(self.dateTimeLabel.snp.bottom).offset(0)
+            make.height.equalTo(20)
+            make.width.equalTo(40)
         }
     }
 }

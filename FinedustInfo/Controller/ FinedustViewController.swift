@@ -60,9 +60,9 @@ class FinedustViewController: UIViewController{
         $0.register(UINib(nibName: "CurrentViewIndicatorCell", bundle: nil),
             forCellWithReuseIdentifier: "CurrentViewIndicatorCell")
         $0.backgroundColor = .none
-        layout.minimumLineSpacing = 3
+        layout.minimumLineSpacing = 1
         layout.scrollDirection = .vertical
-        layout.itemSize = .init(width: 20, height: 20)
+        layout.itemSize = .init(width: 10, height: 10)
         $0.collectionViewLayout = layout
     }
     let backgroundImageView = UIImageView().then { _ in }

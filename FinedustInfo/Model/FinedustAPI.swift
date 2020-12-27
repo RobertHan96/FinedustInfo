@@ -54,9 +54,9 @@ struct FinedustAPI {
             let list = json["response"]["body"]["items"].arrayValue
             print("log tt", list)
 
-            let citis = list.filter{ city -> Bool in
+        let citis = list.filter{ city -> Bool in
                 return city.arrayValue != nil
-        }
+            }
             
         let myCity = citis.filter { city -> Bool in
             let userCity = UserLocationManager().getUnEncodedUserCity()
